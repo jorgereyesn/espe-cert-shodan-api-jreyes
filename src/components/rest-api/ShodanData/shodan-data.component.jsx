@@ -29,6 +29,8 @@ const ShodanData = () => {
 
   function encontrarVulns(data, vulns) {
     var val = [];
+    var val1 = [];
+    var count = 0;
     for (let i = 0; i < data.length; i++) {
       if (typeof data[i].vulns != "undefined") {
         val.push(data[i].vulns);
@@ -37,22 +39,18 @@ const ShodanData = () => {
     // console.log(Object.keys(val[0]));
 
     for (let k = 0; k < vulns.length; k++) {
+      count = 0;
       console.log(vulns[k]);
       for (let j = 0; j < val.length; j++) {
-        console.log(val[j][vulns[k]]);
+        if (typeof val[j][vulns[k]] != "undefined") {
+          if (vulns[k].index === val[j][vulns[k]].index && count < 1) {
+            console.log(val[j][vulns[k]]);
+            val1.push(val[j][vulns[k]]);
+            count++;
+          }
+        }
       }
     }
-
-    // for (let j = 0; j < val.length; j++) {
-    //   console.log(Object.keys(val[j]));
-    //   for(let k=0;k<vulns.length;k++){
-    //     console.log(k-vulns[k]);
-    //
-    //     }
-    //   }
-    // }
-    // console.log(val);
-    // console.log(val.length);
     return val;
   }
 
