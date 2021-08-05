@@ -22,9 +22,6 @@ const ShodanData = () => {
     const local = encontrarVulns(data.data, data.vulns);
     console.log(local);
     setData(local);
-    // local.map((item1) => console.log(item1.key));
-    // console.log(data.vulns.length);
-    // data.vulns.map((item) => console.log(item));
   };
 
   function encontrarVulns(data, vulns) {
@@ -45,13 +42,15 @@ const ShodanData = () => {
         if (typeof val[j][vulns[k]] != "undefined") {
           if (vulns[k].index === val[j][vulns[k]].index && count < 1) {
             console.log(val[j][vulns[k]]);
+            val[j][vulns[k]].cve = vulns[k];
             val1.push(val[j][vulns[k]]);
             count++;
           }
         }
       }
     }
-    return val;
+    console.log(val1.length);
+    return val1;
   }
 
   return (
@@ -61,6 +60,30 @@ const ShodanData = () => {
       {typeof vuln.vulns != "undefined" ? (
         <>
           <p>ESTA IP TIENE VULNERABILIDADES</p>
+          {data.map((item, index) => (
+            <li key={index}>
+              {item.cve}-{item.cvss}-{item.summary}
+            </li>
+          ))}
+          {/*<table>*/}
+          {/*  <tr>*/}
+          {/*    <th>CVE</th>*/}
+          {/*    <th>Detail</th>*/}
+          {/*  </tr>*/}
+          {/*  <tr>*/}
+          {/*    {vuln.vulns.map((item, index) => (*/}
+          {/*      <td key={index}>{item}</td>*/}
+          {/*    ))}*/}
+          {/*  </tr>*/}
+          {/*</table>*/}
+          {/*{vuln.vulns.map((item, index) => (*/}
+          {/*  <li key={index}>{item}</li>*/}
+          {/*))}*/}
+          {/*{data.map((item1, index) => (*/}
+          {/*  <li key={index}>*/}
+          {/*    {item1.cvss}-{item1.summary}*/}
+          {/*  </li>*/}
+          {/*))}*/}
         </>
       ) : (
         <p>ESTA IP NO TIENE VULNERABILIDADES</p>
