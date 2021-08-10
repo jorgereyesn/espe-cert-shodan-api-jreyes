@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const ShodanData = () => {
+export function ExtractData() {
   const [vuln, setVuln] = useState([]);
   const [data, setData] = useState([]);
 
@@ -19,9 +19,11 @@ const ShodanData = () => {
     console.log(data);
     console.log(data.data.length);
     setVuln(data);
-    const local = encontrarVulns(data.data, data.vulns);
-    console.log(local);
-    setData(local);
+    if (typeof data.vulns != "undefined") {
+      const local = encontrarVulns(data.data, data.vulns);
+      console.log(local);
+      setData(local);
+    }
   };
 
   function encontrarVulns(data, vulns) {
@@ -52,43 +54,5 @@ const ShodanData = () => {
     console.log(val1.length);
     return val1;
   }
-
-  return (
-    <div>
-      <h1>SH API CONSUMER</h1>
-
-      {typeof vuln.vulns != "undefined" ? (
-        <>
-          <p>ESTA IP TIENE VULNERABILIDADES</p>
-          {data.map((item, index) => (
-            <li key={index}>
-              {item.cve}-{item.cvss}-{item.summary}
-            </li>
-          ))}
-          {/*<table>*/}
-          {/*  <tr>*/}
-          {/*    <th>CVE</th>*/}
-          {/*    <th>Detail</th>*/}
-          {/*  </tr>*/}
-          {/*  <tr>*/}
-          {/*    {vuln.vulns.map((item, index) => (*/}
-          {/*      <td key={index}>{item}</td>*/}
-          {/*    ))}*/}
-          {/*  </tr>*/}
-          {/*</table>*/}
-          {/*{vuln.vulns.map((item, index) => (*/}
-          {/*  <li key={index}>{item}</li>*/}
-          {/*))}*/}
-          {/*{data.map((item1, index) => (*/}
-          {/*  <li key={index}>*/}
-          {/*    {item1.cvss}-{item1.summary}*/}
-          {/*  </li>*/}
-          {/*))}*/}
-        </>
-      ) : (
-        <p>ESTA IP NO TIENE VULNERABILIDADES</p>
-      )}
-    </div>
-  );
-};
-export default ShodanData;
+  return { vuln, data };
+}
