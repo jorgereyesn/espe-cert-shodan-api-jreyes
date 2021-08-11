@@ -57,26 +57,65 @@ const ShodanData = () => {
   //   console.log(val1.length);
   //   return val1;
   // }
-  const info = ExtractData();
+  const ips = [
+    "192.188.58.99",
+    "192.188.58.61",
+    "192.188.58.70",
+    "192.188.58.63",
+    "192.188.58.50",
+  ];
+  // ips.map((item) => console.log(item));
+  // console.log(ips.length);
+  var info = ips.map((item) => ExtractData(item));
+  // info.map((item) => console.log(item.data, item.vuln));
+  // console.log(locura.length);
+  // const info = ExtractData("192.188.58.61");
 
   return (
     <S.Wrapper>
       <S.Title>SHODAN DATA</S.Title>
-      {typeof info.vuln.vulns != "undefined" ? (
-        <>
-          <IpInformationComponent
-            ip={info.vuln.ip_str}
-            vulns={info.data}
-            org={info.vuln.org}
-            isp={info.vuln.isp}
-          />
-        </>
-      ) : (
-        <>
-          <p>ESTA IP NO TIENE VULNERABILIDADES</p>
-          <IpInformationComponent ip={info.vuln.ip_str} vulns={[]} />
-        </>
+      {info.map((item) =>
+        typeof item.vuln.vulns != "undefined" ? (
+          <>
+            <IpInformationComponent
+              ip={item.vuln.ip_str}
+              vulns={item.data}
+              org={item.vuln.org}
+              isp={item.vuln.isp}
+            />
+          </>
+        ) : (
+          <>
+            <IpInformationComponent
+              ip={item.vuln.ip_str}
+              vulns={[]}
+              org={item.vuln.org}
+              isp={item.vuln.isp}
+            />
+          </>
+        )
       )}
+
+      {/*<S.Title>SHODAN DATA</S.Title>*/}
+      {/*{typeof info.vuln.vulns != "undefined" ? (*/}
+      {/*  <>*/}
+      {/*    <IpInformationComponent*/}
+      {/*      ip={info.vuln.ip_str}*/}
+      {/*      vulns={info.data}*/}
+      {/*      org={info.vuln.org}*/}
+      {/*      isp={info.vuln.isp}*/}
+      {/*    />*/}
+      {/*  </>*/}
+      {/*) : (*/}
+      {/*  <>*/}
+      {/*    <IpInformationComponent*/}
+      {/*      ip={info.vuln.ip_str}*/}
+      {/*      vulns={[]}*/}
+      {/*      org={info.vuln.org}*/}
+      {/*      isp={info.vuln.isp}*/}
+      {/*    />*/}
+      {/*  </>*/}
+      {/*)}*/}
     </S.Wrapper>
   );
 };
