@@ -2,7 +2,7 @@ import React from "react";
 import * as S from "./ip-banner.styles";
 
 const IpBannerComponent = ({ ip, numVulns, org, isp }) => {
-  var text = "";
+  let text = "";
   if (numVulns > 0) {
     text = `Se han detectado ${numVulns} vulnerabilidades`;
   } else {

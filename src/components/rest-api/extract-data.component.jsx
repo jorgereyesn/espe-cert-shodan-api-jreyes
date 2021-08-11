@@ -6,27 +6,19 @@ export function ExtractData(ip) {
   // console.log(ip);
 
   useEffect(() => {
-    // ips.map((item) => getData(item));
+    // getData();
+    const getData = async () => {
+      const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
+      const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
+      const data = await (await fetch(url)).json();
+      setVuln(data);
+      if (typeof data.vulns != "undefined") {
+        const local = encontrarVulns(data.data, data.vulns);
+        setData(local);
+      }
+    };
     getData();
-  }, []);
-
-  const getData = async () => {
-    //192.188.58.99 sin vuln
-    //192.188.58.61 con vuln
-    // const ip = "192.188.58.61";
-    const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
-    const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
-    //https://api.shodan.io/shodan/host/192.188.58.61?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN
-    const data = await (await fetch(url)).json();
-    // console.log(data);
-    // console.log(data.data.length);
-    setVuln(data);
-    if (typeof data.vulns != "undefined") {
-      const local = encontrarVulns(data.data, data.vulns);
-      // console.log(local);
-      setData(local);
-    }
-  };
+  }, [ip]);
 
   function encontrarVulns(data, vulns) {
     var val = [];
@@ -56,5 +48,6 @@ export function ExtractData(ip) {
     // console.log(val1.length);
     return val1;
   }
+
   return { vuln, data };
 }

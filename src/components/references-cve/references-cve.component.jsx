@@ -4,6 +4,7 @@ import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { Button } from "@material-ui/core";
+import uuid from "react-uuid";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -54,7 +55,7 @@ export default function TransitionsModal({ buttonName, references }) {
           <div className={classes.paper}>
             {references.map((item, index) => (
               <p>
-                <a key={index} href={item} target="_blank">
+                <a key={uuid()} href={item} target="_blank" rel="noreferrer">
                   {item}{" "}
                 </a>
               </p>
