@@ -61,11 +61,15 @@ const ShodanData = () => {
 
   return (
     <S.Wrapper>
-      <S.Title>SH CONSUMER</S.Title>
+      <S.Title>SHODAN DATA</S.Title>
       {typeof info.vuln.vulns != "undefined" ? (
         <>
-          <p>ESTA IP TIENE VULNERABILIDADES</p>
-          <IpInformationComponent ip={info.vuln.ip_str} vulns={info.data} />
+          <IpInformationComponent
+            ip={info.vuln.ip_str}
+            vulns={info.data}
+            org={info.vuln.org}
+            isp={info.vuln.isp}
+          />
         </>
       ) : (
         <>

@@ -1,12 +1,19 @@
 import React from "react";
 import * as S from "./ip-information.styles";
 import CveDetailsComponent from "../cve-details/cve-details.component";
-// import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import IpBannerComponent from "../ip-banner/ip-banner.component";
 
-const IpInformationComponent = ({ ip, vulns }) => {
+const IpInformationComponent = ({ ip, vulns, org, isp }) => {
   return (
     <S.Accord>
-      <S.AccordionSum>{ip}</S.AccordionSum>
+      <S.AccordionSum>
+        <IpBannerComponent
+          ip={ip}
+          numVulns={vulns.length}
+          org={org}
+          isp={isp}
+        />
+      </S.AccordionSum>
       {vulns.map((item, index) => (
         <S.AccordionDet key={index}>
           <CveDetailsComponent

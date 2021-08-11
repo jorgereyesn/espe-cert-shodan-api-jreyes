@@ -35,7 +35,9 @@ export default function TransitionsModal({ buttonName, references }) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>{buttonName}</Button>
+      <Button color={"secondary"} onClick={handleOpen}>
+        {buttonName}
+      </Button>
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
