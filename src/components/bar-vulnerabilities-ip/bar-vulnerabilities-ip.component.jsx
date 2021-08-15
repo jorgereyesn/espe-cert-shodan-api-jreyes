@@ -1,12 +1,13 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
+import * as S from "./bar-vulnerabilities-ip.styles";
 
 const BarVulnerabilitiesIpComponent = ({ info }) => {
   const state = {
     labels: info.map((item) => item.vuln.ip_str),
     datasets: [
       {
-        label: "Vulnerabilidades",
+        label: "Vulnerabilities",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "white",
         borderWidth: 2,
@@ -21,14 +22,14 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
       x: {
         ticks: { color: "white" },
         grid: {
-          offset: true,
+          offset: false,
           color: "green",
         },
       },
       y: {
         ticks: { color: "white" },
         grid: {
-          offset: true,
+          offset: false,
           color: "green",
         },
       },
@@ -54,7 +55,11 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
     },
   };
 
-  return <Bar data={state} options={config} />;
+  return (
+    <S.Wrapper>
+      <Bar data={state} options={config} />
+    </S.Wrapper>
+  );
 };
 
 export default BarVulnerabilitiesIpComponent;
