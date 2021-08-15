@@ -10,6 +10,7 @@ export function ExtractData(ip) {
     const getData = async () => {
       const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
       const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
+      //https://api.shodan.io/shodan/host/192.188.58.61?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN
       const data = await (await fetch(url)).json();
       setVuln(data);
       if (typeof data.vulns != "undefined") {
@@ -30,7 +31,6 @@ export function ExtractData(ip) {
       }
     }
     // console.log(Object.keys(val[0]));
-
     for (let k = 0; k < vulns.length; k++) {
       count = 0;
       // console.log(vulns[k]);
