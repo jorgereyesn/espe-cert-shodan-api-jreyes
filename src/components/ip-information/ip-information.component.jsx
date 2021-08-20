@@ -3,11 +3,28 @@ import * as S from "./ip-information.styles";
 import CveDetailsComponent from "../cve-details/cve-details.component";
 import IpBannerComponent from "../ip-banner/ip-banner.component";
 
-const IpInformationComponent = ({ ip, data, org, isp }) => {
+const IpInformationComponent = ({
+  ip,
+  data,
+  org,
+  isp,
+  lastUpdate,
+  country,
+  city,
+}) => {
   return (
     <S.Accord>
       <S.AccordionSum>
-        <IpBannerComponent ip={ip} numVulns={data.length} org={org} isp={isp} />
+        <IpBannerComponent
+          ip={ip}
+          numVulns={data.length}
+          org={org}
+          isp={isp}
+          data={data}
+          lastUpdate={lastUpdate}
+          country={country}
+          city={city}
+        />
       </S.AccordionSum>
       {data.map((item, index) => (
         <S.AccordionDet key={index}>

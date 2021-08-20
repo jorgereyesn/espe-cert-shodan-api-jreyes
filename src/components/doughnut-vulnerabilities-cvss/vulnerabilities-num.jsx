@@ -1,31 +1,33 @@
-import React from "react";
-
 function VulnerabilitiesNum(info) {
-  let none,
-    low,
-    medium,
-    high,
-    critical = 0;
+  let none = 0;
+  let low = 0;
+  let medium = 0;
+  let high = 0;
+  let critical = 0;
 
   for (let i = 0; i < info.length; i++) {
-    if (info.data[i].cvss === 0) {
+    if (
+      info[i].cvss === 0 ||
+      info[i].cvss === "" ||
+      info[i].cvss === "undefined"
+    ) {
       none++;
     }
-    if (info.data[i].cvss > 0 && info.data[i].cvss < 3.9) {
+    if (info[i].cvss > 0 && info[i].cvss < 4) {
       low++;
     }
-    if (info.data[i].cvss > 3.9 && info.data[i].cvss < 6.9) {
+    if (info[i].cvss > 3.9 && info[i].cvss < 7) {
       medium++;
     }
-    if (info.data[i].cvss > 6.9 && info.data[i].cvss < 8.9) {
+    if (info[i].cvss > 6.9 && info[i].cvss < 9) {
       high++;
     }
-    if (info.data[i].cvss > 8.9 && info.data[i].cvss < 11) {
+    if (info[i].cvss > 8.9 && info[i].cvss < 11) {
       critical++;
     }
-    console.log(none, low, medium);
-    return 0;
+    // console.log(none, low, medium);
   }
+  return [none, low, medium, high, critical];
 }
 
 export default VulnerabilitiesNum;

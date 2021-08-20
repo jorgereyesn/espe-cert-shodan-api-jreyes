@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    backgroundColor: theme.palette.background.paper,
-    border: "2px solid #000",
+    backgroundColor: "#E3DFDF",
+    border: "3px solid #66FA00",
     boxShadow: theme.shadows[5],
     padding: theme.spacing(2, 4, 3),
     maxHeight: "70%",
@@ -35,7 +35,7 @@ export default function ReferencesCveComponent({ buttonName, references }) {
 
   return (
     <div>
-      <Button color={"secondary"} onClick={handleOpen}>
+      <Button color={"secondary"} onClick={handleOpen} variant="outlined">
         {buttonName}
       </Button>
       <Modal

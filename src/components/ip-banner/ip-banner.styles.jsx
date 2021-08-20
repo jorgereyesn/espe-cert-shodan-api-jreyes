@@ -6,6 +6,8 @@ export const Wrapper = styled(Container)`
   background-color: #17202a;
   background-image: -webkit-linear-gradient(30deg, #34495e 50%, #212f3d 50%);
   color: white;
+  border: 2px solid white;
+  padding: 0.5em;
 `;
 
 export const DataGrid = styled(Grid)``;

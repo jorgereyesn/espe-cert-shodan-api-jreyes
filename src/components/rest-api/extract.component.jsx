@@ -1,29 +1,12 @@
 import { useEffect, useState } from "react";
 
-export function ExtractData(ip) {
+import React from "react";
+import DashboardComponent from "../../Layouts/Dashboard/dashboard.component";
+import ShodanData from "../../Layouts/ShodanData/shodan-data.component";
+
+const ExtractComponent = () => {
   const [vuln, setVuln] = useState([]);
   const [data, setData] = useState([]);
-  // console.log(ip);
-
-  useEffect(() => {
-    console.log(1);
-    // getData();
-    async function getData() {
-      const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
-      const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
-      //https://api.shodan.io/shodan/host/192.188.58.61?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN
-      const data = await (await fetch(url)).json();
-
-      // if (data.status === 200) {
-      setVuln(data);
-      if (typeof data.vulns != "undefined") {
-        const local = encontrarVulns(data.data, data.vulns);
-        setData(local);
-      }
-    }
-    // }
-    getData();
-  }, []);
 
   function encontrarVulns(data, vulns) {
     var val = [];
@@ -49,9 +32,34 @@ export function ExtractData(ip) {
         }
       }
     }
-    // console.log(val1.length);
     return val1;
   }
 
-  return { vuln, data };
-}
+  useEffect(() => {
+    async function getData() {
+      const data = await (
+        await fetch(
+          "https://api.shodan.io/shodan/host/192.188.58.50?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN"
+        )
+      ).json();
+      // console.log(data);
+      setVuln(data);
+      if (typeof data.vulns != "undefined") {
+        const local = encontrarVulns(data.data, data.vulns);
+        setData(local);
+      }
+    }
+
+    getData();
+  }, []);
+  const info = { vuln, data };
+
+  return (
+    <>
+      <DashboardComponent info={info} />
+      <ShodanData info={info} />
+    </>
+  );
+};
+
+export default ExtractComponent;

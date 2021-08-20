@@ -2,9 +2,21 @@ import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import * as S from "./doughnut-vulnerabilities-cvss.styles";
 import VulnerabilitiesNum from "./vulnerabilities-num";
+import VulnerabilitiesSum from "./vulnerabilities-sum";
 
-const DoughnutVulnerabilitiesCvssComponent = ({ info }) => {
-  // const data = VulnerabilitiesNum(info.data);
+const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
+  // const data = info.map((item) => VulnerabilitiesNum(item.data));
+  // const sum = VulnerabilitiesSum(data);
+  let sum;
+  let data;
+  if (singleIp) {
+    //FUNCIONA PARA IP INDIVIDUAL
+    sum = VulnerabilitiesNum(info);
+  } else {
+    //FUNCIONA PARA MULTIPLES IP
+    data = info.map((item) => VulnerabilitiesNum(item.data));
+    sum = VulnerabilitiesSum(data);
+  }
 
   const color = [
     "rgba(255, 255, 255)",
@@ -15,14 +27,13 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info }) => {
   ];
   const state = {
     labels: ["None", "Low", "Medium", "High", "Critical"],
-    // info.map((item) => item.vuln.vulns)
     datasets: [
       {
         label: "CVSS Score",
         backgroundColor: color,
-        borderColor: "black",
+        borderColor: "rgba(238, 238, 238 )",
         borderWidth: 2,
-        data: ["50", "100", "20", "30", "2"],
+        data: sum,
       },
     ],
   };
@@ -32,10 +43,10 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info }) => {
       x: {
         ticks: {
           color: "white",
-          display: false,
+          display: true,
         },
         grid: {
-          offset: false,
+          offset: true,
           color: "green",
         },
       },
@@ -53,7 +64,8 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "CVSS Score",
+        text: "CVSS v3.0 Ratings",
+        position: "top",
         font: {
           size: 20,
         },
@@ -62,7 +74,7 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info }) => {
       },
       legend: {
         display: true,
-        position: "top",
+        position: "left",
         labels: {
           color: "white",
           boxWidth: 20,

@@ -7,7 +7,7 @@ import DoughnutVulnerabilitiesCvssComponen from "../../components/doughnut-vulne
 const DashboardComponent = ({ info }) => {
   return (
     <S.Wrapper>
-      <Grid container justifyContent="center">
+      <Grid container spacing={3} justifyContent="center">
         <Grid item md={6}>
           <BarVulnerabilitiesIpComponent info={info} />
         </Grid>
@@ -15,7 +15,7 @@ const DashboardComponent = ({ info }) => {
           <BarVulnerabilitiesIpComponent info={info} />
         </Grid>
         <Grid item md={6}>
-          <DoughnutVulnerabilitiesCvssComponen info={info} />
+          <DoughnutVulnerabilitiesCvssComponen info={info} singleIp={false} />
         </Grid>
       </Grid>
     </S.Wrapper>
