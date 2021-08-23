@@ -43,10 +43,10 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
       x: {
         ticks: {
           color: "white",
-          display: true,
+          display: false,
         },
         grid: {
-          offset: true,
+          offset: false,
           color: "green",
         },
       },

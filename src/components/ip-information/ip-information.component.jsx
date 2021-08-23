@@ -21,7 +21,10 @@ const IpInformationComponent = ({
           org={org}
           isp={isp}
           data={data}
-          lastUpdate={lastUpdate}
+          lastUpdate={`${lastUpdate?.substr(0, 10)} ${lastUpdate?.substr(
+            11,
+            8
+          )}`}
           country={country}
           city={city}
         />

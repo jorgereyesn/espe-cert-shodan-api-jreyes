@@ -1,17 +1,24 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
-import * as S from "./bar-vulnerabilities-ip.styles";
+import { Line } from "react-chartjs-2";
+import * as S from "./line-vulnerabilities.styles";
+import YearsCountComponent from "./years-count.component";
 
-const BarVulnerabilitiesIpComponent = ({ info }) => {
+const LineYearsVulnerabilitiesComponent = ({ info }) => {
+  //EXTRAER AÑOS
+  const years = info.map((item) =>
+    item.data.map((item1) => item1.cve.substr(4, 4))
+  );
+  const test = YearsCountComponent(years);
+
   const state = {
-    labels: info.map((item) => item.vuln.ip_str),
+    labels: test.repeatYears,
     datasets: [
       {
         label: "Vulnerabilities",
         backgroundColor: "rgba(75,192,192,1)",
         borderColor: "white",
         borderWidth: 2,
-        data: info.map((item) => item.data.length),
+        data: test.finalCount,
       },
     ],
   };
@@ -37,7 +44,7 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Cantidad de vulnerabilidades por IP",
+        text: "Años de referencia en CVE",
         font: {
           size: 20,
         },
@@ -57,9 +64,9 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
 
   return (
     <S.Wrapper>
-      <Bar data={state} options={config} />
+      <Line data={state} options={config} />
     </S.Wrapper>
   );
 };
 
-export default BarVulnerabilitiesIpComponent;
+export default LineYearsVulnerabilitiesComponent;

@@ -5,9 +5,10 @@ import DashboardComponent from "../../Layouts/Dashboard/dashboard.component";
 import ShodanData from "../../Layouts/ShodanData/shodan-data.component";
 
 const ExtractComponent = () => {
-  const [vuln, setVuln] = useState([]);
-  const [data, setData] = useState([]);
+  const [vulnerabilities, setVulnerabilities] = useState([]);
+  const [shodanData, setShodanData] = useState([]);
 
+  //EXTRACCION DE DATA DE VULNERABILIDADES
   function encontrarVulns(data, vulns) {
     var val = [];
     var val1 = [];
@@ -17,14 +18,12 @@ const ExtractComponent = () => {
         val.push(data[i].vulns);
       }
     }
-    // console.log(Object.keys(val[0]));
+
     for (let k = 0; k < vulns.length; k++) {
       count = 0;
-      // console.log(vulns[k]);
       for (let j = 0; j < val.length; j++) {
         if (typeof val[j][vulns[k]] != "undefined") {
           if (vulns[k].index === val[j][vulns[k]].index && count < 1) {
-            // console.log(val[j][vulns[k]]);
             val[j][vulns[k]].cve = vulns[k];
             val1.push(val[j][vulns[k]]);
             count++;
@@ -35,31 +34,41 @@ const ExtractComponent = () => {
     return val1;
   }
 
+  //CONEXION CON API
   useEffect(() => {
-    async function getData() {
-      const data = await (
-        await fetch(
-          "https://api.shodan.io/shodan/host/192.188.58.50?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN"
-        )
-      ).json();
-      // console.log(data);
-      setVuln(data);
-      if (typeof data.vulns != "undefined") {
-        const local = encontrarVulns(data.data, data.vulns);
-        setData(local);
+    const ips = [
+      "192.188.58.99",
+      "192.188.58.61",
+      "192.188.58.50",
+      "192.188.58.45",
+    ];
+    const getData = async (value) => {
+      //DATOS PARA SOLICITAR INFORMACION A SHODAN
+      const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
+      const url =
+        "https://api.shodan.io/shodan/host/" + value + "?key=" + apiKey;
+
+      //SOLICITUD SHODAN
+      const content = await (await fetch(url)).json();
+
+      //SE ENVIA EL CONTENIDO DE LA IP
+      setShodanData(content);
+      // console.log(content);
+
+      //SE EXTRAE LA INFO RELACIONADA CON VULNERABILIDADES
+      if (content?.vulns) {
+        const data = encontrarVulns(content.data, content.vulns);
+        setShodanData(data);
+        // console.log(data);
       }
-    }
+    };
 
-    getData();
+    ips.map((item) => getData(item));
   }, []);
-  const info = { vuln, data };
 
-  return (
-    <>
-      <DashboardComponent info={info} />
-      <ShodanData info={info} />
-    </>
-  );
+  console.log(shodanData);
+
+  return <>HOLA</>;
 };
 
 export default ExtractComponent;

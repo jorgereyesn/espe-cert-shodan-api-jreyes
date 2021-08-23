@@ -15,8 +15,7 @@ const ShodanDataComponent = ({ info }) => {
               data={item.data}
               org={item.vuln.org}
               isp={item.vuln.isp}
-              lastUpdate={`${item.vuln.last_update.substr(0, 10)}
-                  ${item.vuln.last_update.substr(11, 8)}`}
+              lastUpdate={item.vuln.last_update}
               country={item.vuln.country_name}
               city={item.vuln.city}
             />

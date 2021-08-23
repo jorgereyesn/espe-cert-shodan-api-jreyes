@@ -4,7 +4,6 @@ import ShodanData from "../../Layouts/ShodanData/shodan-data.component";
 import { ExtractData } from "../../components/rest-api/extract-data.component";
 
 import * as S from "./main-page.styles";
-import ExtractComponent from "../../components/rest-api/extract.component";
 
 const MainPageComponent = () => {
   const [ips] = useState([
@@ -21,11 +20,6 @@ const MainPageComponent = () => {
   ]);
 
   const info = ips.map((item) => ExtractData(item));
-  // let a = "192.188.58.50";
-  // const info = ExtractData(ips[2]);
-  // console.log(ips[2]);
-  // const info1 = ExtractComponent();
-  // console.log(info1);
 
   return (
     <S.Wrapper>

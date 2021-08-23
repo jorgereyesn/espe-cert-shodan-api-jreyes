@@ -3,6 +3,7 @@ import { Grid } from "@material-ui/core";
 import * as S from "./dashboard.styles";
 import BarVulnerabilitiesIpComponent from "../../components/bar-vulnerabilities-ip/bar-vulnerabilities-ip.component";
 import DoughnutVulnerabilitiesCvssComponen from "../../components/doughnut-vulnerabilities-cvss/doughnut-vulnerabilities-cvss.component";
+import LineYearsVulnerabilitiesComponent from "../../components/line-years-vulnerabilities/line-years-vulnerabilities.component";
 
 const DashboardComponent = ({ info }) => {
   return (
@@ -12,7 +13,7 @@ const DashboardComponent = ({ info }) => {
           <BarVulnerabilitiesIpComponent info={info} />
         </Grid>
         <Grid item md={6}>
-          <BarVulnerabilitiesIpComponent info={info} />
+          <LineYearsVulnerabilitiesComponent info={info} />
         </Grid>
         <Grid item md={6}>
           <DoughnutVulnerabilitiesCvssComponen info={info} singleIp={false} />
