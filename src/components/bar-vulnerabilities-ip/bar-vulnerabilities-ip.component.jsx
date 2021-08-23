@@ -17,7 +17,7 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
   };
 
   const config = {
-    indexAxis: "x",
+    indexAxis: "y",
     scales: {
       x: {
         ticks: { color: "white" },

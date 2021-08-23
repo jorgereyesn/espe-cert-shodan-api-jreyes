@@ -4,6 +4,7 @@ import ShodanData from "../../Layouts/ShodanData/shodan-data.component";
 import { ExtractData } from "../../components/rest-api/extract-data.component";
 
 import * as S from "./main-page.styles";
+import PriorityAtentionComponent from "../../Layouts/PriorityAtention/priority-atention.component";
 
 const MainPageComponent = () => {
   const [ips] = useState([
@@ -20,10 +21,26 @@ const MainPageComponent = () => {
   ]);
 
   const info = ips.map((item) => ExtractData(item));
+  const sum = info.map((item) => item.data.length);
+  const total = sum.reduce((a, b) => a + b, 0);
 
   return (
     <S.Wrapper>
+      <S.Header />
+      <S.Description>
+        SHODAN ha identificado {total} vulnerabilidades que podrian afectar a su
+        organizacion
+      </S.Description>
+      <S.Line />
+      <S.Description>Total de IP escaneadas {ips.length}</S.Description>
+      <S.Line />
+      <S.Title>DASHBOARD</S.Title>
       <DashboardComponent info={info} />
+      <S.Line />
+      <S.Title>SUGERENCIA DE PRIORIDAD DE ATENCIÓN</S.Title>
+      <PriorityAtentionComponent info={info} />
+      <S.Line />
+      <S.Title>SHODAN DATA</S.Title>
       <ShodanData info={info} />
     </S.Wrapper>
   );

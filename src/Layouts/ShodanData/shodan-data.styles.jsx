@@ -7,8 +7,3 @@ export const Wrapper = styled.div`
   color: white;
   text-align: center;
 `;
-export const Title = styled.h1`
-  margin: 0;
-  padding: 0.5em;
-  background-color: black;
-`;

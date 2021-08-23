@@ -5,7 +5,6 @@ import IpInformationComponent from "../../components/ip-information/ip-informati
 const ShodanDataComponent = ({ info }) => {
   return (
     <S.Wrapper>
-      <S.Title>SHODAN DATA</S.Title>
       {info.map((item, index) =>
         typeof item.vuln.vulns != "undefined" ? (
           <>
