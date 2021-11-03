@@ -14,13 +14,13 @@ const DashboardComponent = ({ info }) => {
           <BarVulnerabilitiesIpComponent info={info} />
         </Grid>
         <Grid item md={6}>
+          <BarPorts info={info} />
+        </Grid>
+        <Grid item md={6}>
           <LineYearsVulnerabilitiesComponent info={info} />
         </Grid>
         <Grid item md={6}>
           <DoughnutVulnerabilitiesCvssComponen info={info} singleIp={false} />
-        </Grid>
-        <Grid item md={6}>
-          <BarPorts info={info} />
         </Grid>
       </Grid>
     </S.Wrapper>
