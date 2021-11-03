@@ -3,27 +3,51 @@ import { useEffect, useState } from "react";
 export function ExtractData(ip) {
   const [vuln, setVuln] = useState([]);
   const [data, setData] = useState([]);
-  // console.log(ip);
 
   useEffect(() => {
-    console.log(1);
-    // getData();
-    async function getData() {
-      const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
-      const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
-      //https://api.shodan.io/shodan/host/192.188.58.61?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN
-      const data = await (await fetch(url)).json();
+    const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
+    const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
+    fetch(url)
+      .then((res) => res.json())
+      .then(
+        (result) => {
+          // setIsLoaded(true);
+          setVuln(result);
+          if (typeof result.vulns != "undefined") {
+            const local = encontrarVulns(result.data, result.vulns);
+            setData(local);
+          }
+        },
+        // Nota: es importante manejar errores aquí y no en
+        // un bloque catch() para que no interceptemos errores
+        // de errores reales en los componentes.
+        (error) => {
+          // setIsLoaded(true);
+          console.log(error);
+        }
+      );
+  }, [data.data, data.vulns, ip]);
 
-      // if (data.status === 200) {
-      setVuln(data);
-      if (typeof data.vulns != "undefined") {
-        const local = encontrarVulns(data.data, data.vulns);
-        setData(local);
-      }
-    }
-    // }
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   async function getData() {
+  //     const apiKey = "FL5f6aSOu464esmyqf7c0kDDi0UycPNN";
+  //     const url = "https://api.shodan.io/shodan/host/" + ip + "?key=" + apiKey;
+  //     //https://api.shodan.io/shodan/host/192.188.58.61?key=FL5f6aSOu464esmyqf7c0kDDi0UycPNN
+  //     const data = await (await fetch(url)).json();
+  //
+  //     // if (data.status === 200) {
+  //     if (data.ip_str !== null) {
+  //       setVuln(data);
+  //       if (typeof data.vulns != "undefined") {
+  //         const local = encontrarVulns(data.data, data.vulns);
+  //         setData(local);
+  //       }
+  //       // console.log(data.ip_str);
+  //     }
+  //   }
+  //   // }
+  //   getData();
+  // }, []);
 
   function encontrarVulns(data, vulns) {
     var val = [];

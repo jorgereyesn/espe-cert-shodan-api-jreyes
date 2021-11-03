@@ -8,8 +8,14 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
     datasets: [
       {
         label: "Vulnerabilities",
-        backgroundColor: "rgba(75,192,192,1)",
-        borderColor: "white",
+        backgroundColor: "black",
+        borderColor: info.map((item) =>
+          item.data.length > 100
+            ? "red"
+            : item.data.length > 50
+            ? "yellow"
+            : "rgba(116, 238, 63)"
+        ),
         borderWidth: 2,
         data: info.map((item) => item.data.length),
       },

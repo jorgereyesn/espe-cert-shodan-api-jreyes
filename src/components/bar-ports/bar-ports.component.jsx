@@ -1,24 +1,19 @@
 import React from "react";
-import { Line } from "react-chartjs-2";
-import * as S from "./line-vulnerabilities.styles";
-import YearsCountComponent from "./years-count.component";
+import { Bar } from "react-chartjs-2";
+import * as S from "./bar-ports.styles";
+import YearsCountComponent from "../line-years-vulnerabilities/years-count.component";
 
-const LineYearsVulnerabilitiesComponent = ({ info }) => {
-  //EXTRAER AÑOS
-  const years = info.map((item) =>
-    item.data.map((item1) => item1.cve.substr(4, 4))
-  );
-  const test = YearsCountComponent(years);
-  console.log(test);
+const BarPorts = ({ info }) => {
+  let ports;
+  ports = info?.map((item) => item?.vuln?.ports?.map((item1) => item1));
+  const test = YearsCountComponent(ports);
   const state = {
     labels: test.repeatYears,
     datasets: [
       {
-        label: "Vulnerabilities",
-        backgroundColor: test?.finalCount?.map((item) =>
-          item > 100 ? "red" : item > 50 ? "yellow" : "rgba(116, 238, 63)"
-        ),
-        borderColor: "red",
+        label: "IPs",
+        backgroundColor: "black",
+        borderColor: "rgba(75,192,192,1)",
         borderWidth: 2,
         data: test.finalCount,
       },
@@ -46,7 +41,7 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Años de referencia en CVE",
+        text: "Puertos",
         font: {
           size: 20,
         },
@@ -66,9 +61,9 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
 
   return (
     <S.Wrapper>
-      <Line data={state} options={config} />
+      <Bar data={state} options={config} />
     </S.Wrapper>
   );
 };
 
-export default LineYearsVulnerabilitiesComponent;
+export default BarPorts;

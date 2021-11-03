@@ -31,7 +31,7 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
       {
         label: "CVSS Score",
         backgroundColor: color,
-        borderColor: "rgba(238, 238, 238 )",
+        borderColor: "black",
         borderWidth: 2,
         data: sum,
       },

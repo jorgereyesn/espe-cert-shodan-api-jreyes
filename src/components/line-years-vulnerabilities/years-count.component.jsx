@@ -3,9 +3,9 @@ import React from "react";
 const YearsCountComponent = (years) => {
   //Extraer años en un solo arreglo
   let allYears = [];
-  for (let i = 0; i < years.length; i++) {
-    if (years[i].length > 0) {
-      for (let j = 0; j < years[i].length; j++) {
+  for (let i = 0; i < years?.length; i++) {
+    if (years[i]?.length > 0) {
+      for (let j = 0; j < years[i]?.length; j++) {
         allYears.push(years[i][j]);
       }
     }
@@ -13,6 +13,7 @@ const YearsCountComponent = (years) => {
 
   //Ordenar los años
   allYears = allYears.sort();
+  // console.log(allYears);
 
   //Contar años repetidos
   const repeatYears = allYears.reduce((acc, item) => {

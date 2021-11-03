@@ -9,7 +9,7 @@ const ShodanDataComponent = ({ info }) => {
         typeof item.vuln.vulns != "undefined" ? (
           <>
             <IpInformationComponent
-              key={index}
+              key={`sh` - index - item.vuln.ip_str}
               ip={item.vuln.ip_str}
               data={item.data}
               org={item.vuln.org}
@@ -17,6 +17,11 @@ const ShodanDataComponent = ({ info }) => {
               lastUpdate={item.vuln.last_update}
               country={item.vuln.country_name}
               city={item.vuln.city}
+              asn={item.vuln.asn}
+              tags={item.vuln.tags}
+              ports={item.vuln.ports}
+              hostnames={item.vuln.hostnames}
+              domains={item.vuln.domains}
             />
           </>
         ) : (
@@ -30,6 +35,11 @@ const ShodanDataComponent = ({ info }) => {
               lastUpdate={item.vuln.last_update}
               country={item.vuln.country_name}
               city={item.vuln.city}
+              asn={item.vuln.asn}
+              tags={item.vuln.tags}
+              ports={item.vuln.ports}
+              hostnames={item.vuln.hostnames}
+              domains={item.vuln.domains}
             />
           </>
         )

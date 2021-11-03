@@ -11,6 +11,11 @@ const IpInformationComponent = ({
   lastUpdate,
   country,
   city,
+  asn,
+  tags,
+  ports,
+  hostnames,
+  domains,
 }) => {
   return (
     <S.Accord>
@@ -27,6 +32,11 @@ const IpInformationComponent = ({
           )}`}
           country={country}
           city={city}
+          asn={asn}
+          tags={tags}
+          ports={ports}
+          hostnames={hostnames}
+          domains={domains}
         />
       </S.AccordionSum>
       {data.map((item, index) => (

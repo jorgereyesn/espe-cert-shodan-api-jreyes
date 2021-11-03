@@ -11,6 +11,11 @@ const IpBannerComponent = ({
   lastUpdate,
   country,
   city,
+  asn,
+  tags,
+  ports,
+  hostnames,
+  domains,
 }) => {
   let text = "";
   if (numVulns > 0) {
@@ -18,20 +23,26 @@ const IpBannerComponent = ({
   } else {
     text = "No se han detectado vulnerabilidades";
   }
+  // console.log(tags);
   return (
     <S.Wrapper>
-      <S.DataGrid container justifyContent="center" alignItems="center">
+      <S.DataGridContainer
+        container
+        justifyContent="center"
+        alignItems="center"
+        spacing={3}
+      >
         <S.DataGrid item xs={3}>
-          <S.Ip>{ip}</S.Ip>
+          <S.Ip>IP: {ip}</S.Ip>
         </S.DataGrid>
         <S.DataGrid item xs={3}>
           {text}
         </S.DataGrid>
         <S.DataGrid item xs={3}>
-          org: {org}
+          ORG: {org}
         </S.DataGrid>
         <S.DataGrid item xs={3}>
-          isp: {isp}
+          ISP: {isp}
         </S.DataGrid>
         <S.DataGrid item xs={3}>
           Last_Update: {lastUpdate}
@@ -39,6 +50,36 @@ const IpBannerComponent = ({
         <S.DataGrid item xs={3}>
           Location: {country} - {city}
         </S.DataGrid>
+        <S.DataGrid item xs={3}>
+          ASN: {asn}
+        </S.DataGrid>
+        {tags && (
+          <S.DataGrid item xs={3}>
+            Tags: {tags.map((item) => item + " - ")}
+          </S.DataGrid>
+        )}
+        {ports && (
+          <S.DataGrid item xs={3}>
+            Ports: {ports.map((item) => item + " - ")}
+          </S.DataGrid>
+        )}
+        {hostnames && (
+          <S.DataGrid item xs={3}>
+            Hostnames:{" "}
+            {hostnames.map((item) => (
+              <p>
+                <a href={`https://` + item} target="_blank">
+                  {item}
+                </a>
+              </p>
+            ))}
+          </S.DataGrid>
+        )}
+        {domains && (
+          <S.DataGrid item xs={3}>
+            Domain: {domains.map((item) => item)}
+          </S.DataGrid>
+        )}
         {numVulns > 0 && (
           <S.DataGrid item xs={3}>
             <ModalIpVulnsCvssComponent
@@ -47,7 +88,7 @@ const IpBannerComponent = ({
             />
           </S.DataGrid>
         )}
-      </S.DataGrid>
+      </S.DataGridContainer>
     </S.Wrapper>
   );
 };

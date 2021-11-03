@@ -10,5 +10,12 @@ export const Wrapper = styled(Container)`
   padding: 0.5em;
 `;
 
-export const DataGrid = styled(Grid)``;
+export const DataGridContainer = styled(Grid)`
+  padding-top: 1em;
+  padding-bottom: 1em;
+`;
+export const DataGrid = styled(Grid)`
+  padding-top: 1em;
+  padding-bottom: 1em;
+`;
 export const Ip = styled.h2``;
