@@ -26,17 +26,17 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
     indexAxis: "y",
     scales: {
       x: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
       y: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
     },
@@ -48,7 +48,7 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
           size: 20,
         },
         padding: 20,
-        color: "white",
+        color: "black",
       },
       legend: {
         display: false,

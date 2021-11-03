@@ -18,7 +18,7 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
         backgroundColor: test?.finalCount?.map((item) =>
           item > 100 ? "red" : item > 50 ? "yellow" : "rgba(116, 238, 63)"
         ),
-        borderColor: "red",
+        borderColor: "black",
         borderWidth: 2,
         data: test.finalCount,
       },
@@ -29,17 +29,17 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
     indexAxis: "x",
     scales: {
       x: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
       y: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
     },
@@ -51,13 +51,13 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
           size: 20,
         },
         padding: 20,
-        color: "white",
+        color: "black",
       },
       legend: {
         display: false,
         position: "top",
         labels: {
-          color: "white",
+          color: "black",
           boxWidth: 20,
         },
       },

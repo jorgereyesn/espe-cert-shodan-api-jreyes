@@ -24,17 +24,17 @@ const BarPorts = ({ info }) => {
     indexAxis: "x",
     scales: {
       x: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
       y: {
-        ticks: { color: "white" },
+        ticks: { color: "black" },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
     },
@@ -46,13 +46,13 @@ const BarPorts = ({ info }) => {
           size: 20,
         },
         padding: 20,
-        color: "white",
+        color: "black",
       },
       legend: {
         display: false,
         position: "top",
         labels: {
-          color: "white",
+          color: "black",
           boxWidth: 20,
         },
       },

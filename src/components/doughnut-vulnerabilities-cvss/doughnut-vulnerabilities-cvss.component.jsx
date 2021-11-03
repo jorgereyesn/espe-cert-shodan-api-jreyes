@@ -42,22 +42,22 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
     scales: {
       x: {
         ticks: {
-          color: "white",
+          color: "black",
           display: false,
         },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
       y: {
         ticks: {
-          color: "white",
+          color: "black",
           display: false,
         },
         grid: {
           offset: false,
-          color: "green",
+          color: "black",
         },
       },
     },
@@ -70,13 +70,13 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
           size: 20,
         },
         padding: 20,
-        color: "white",
+        color: "black",
       },
       legend: {
         display: true,
         position: "left",
         labels: {
-          color: "white",
+          color: "black",
           boxWidth: 20,
         },
       },
