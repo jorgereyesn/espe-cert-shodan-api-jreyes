@@ -5,6 +5,7 @@ import { ExtractData } from "../../components/rest-api/extract-data.component";
 
 import * as S from "./main-page.styles";
 import PriorityAtentionComponent from "../../Layouts/PriorityAtention/priority-atention.component";
+import { sumData } from "../../util";
 
 const MainPageComponent = () => {
   const [ips] = useState([
@@ -16,12 +17,12 @@ const MainPageComponent = () => {
     "192.188.58.78",
     "192.188.58.76",
     "192.188.58.180",
+    "192.188.58.75",
   ]);
 
   const info = ips.map((item) => ExtractData(item));
   const sum = info.map((item) => item.data.length);
-  const total = sum.reduce((a, b) => a + b, 0);
-  // console.log(info);
+  const total = sumData(sum);
 
   if (!info) return null;
   return (

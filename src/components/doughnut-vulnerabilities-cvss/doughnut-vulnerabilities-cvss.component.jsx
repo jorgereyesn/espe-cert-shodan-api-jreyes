@@ -1,21 +1,18 @@
 import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import * as S from "./doughnut-vulnerabilities-cvss.styles";
-import VulnerabilitiesNum from "./vulnerabilities-num";
-import VulnerabilitiesSum from "./vulnerabilities-sum";
+import { numberVulnerabilitiesCVSS, sumVulnerabilitiesCVSS } from "../../util";
 
 const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
-  // const data = info.map((item) => VulnerabilitiesNum(item.data));
-  // const sum = VulnerabilitiesSum(data);
   let sum;
   let data;
   if (singleIp) {
     //FUNCIONA PARA IP INDIVIDUAL
-    sum = VulnerabilitiesNum(info);
+    sum = numberVulnerabilitiesCVSS(info);
   } else {
     //FUNCIONA PARA MULTIPLES IP
-    data = info.map((item) => VulnerabilitiesNum(item.data));
-    sum = VulnerabilitiesSum(data);
+    data = info.map((item) => numberVulnerabilitiesCVSS(item.data));
+    sum = sumVulnerabilitiesCVSS(data);
   }
 
   const color = [
@@ -64,7 +61,7 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
     plugins: {
       title: {
         display: true,
-        text: "CVSS v3.0 Ratings",
+        text: "Common Vulnerability Scoring System",
         position: "top",
         font: {
           size: 20,

@@ -1,21 +1,26 @@
 import React from "react";
 import { Bar } from "react-chartjs-2";
 import * as S from "./bar-ports.styles";
-import YearsCountComponent from "../line-years-vulnerabilities/years-count.component";
+import {
+  countRepeatVariables,
+  extractRepeatVariables,
+  groupRepeatVariables,
+} from "../../util";
 
 const BarPorts = ({ info }) => {
   let ports;
   ports = info?.map((item) => item?.vuln?.ports?.map((item1) => item1));
-  const test = YearsCountComponent(ports);
+  const labels = extractRepeatVariables(groupRepeatVariables(ports));
+  const data = countRepeatVariables(labels, groupRepeatVariables(ports));
   const state = {
-    labels: test.repeatYears,
+    labels: labels,
     datasets: [
       {
         label: "IPs",
         backgroundColor: "black",
         borderColor: "rgba(75,192,192,1)",
         borderWidth: 2,
-        data: test.finalCount,
+        data: data,
       },
     ],
   };
