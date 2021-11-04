@@ -1,5 +1,9 @@
 import styled from "styled-components";
-export const Wrapper = styled.div``;
+import { Grid } from "@material-ui/core";
+export const Wrapper = styled.div`
+  padding-top: 100px;
+  background-color: rgba(189, 203, 217);
+`;
 export const Title = styled.h2`
   margin: 0;
   padding: 0.5em;
@@ -12,8 +16,9 @@ export const Description = styled.p`
   padding: 0.5em;
   background-color: black;
   color: white;
-  text-align: center;
-  font-size: 2em;
+  text-align: right;
+  font-size: 1.8em;
+  font-weight: 500;
 `;
 
 export const Line = styled.hr`
@@ -21,3 +26,29 @@ export const Line = styled.hr`
   margin: 0;
 `;
 export const Header = styled.header``;
+
+export const DescriptionVariables = styled.p`
+  margin: 0;
+  padding: 0.5em;
+  background-color: rgba(189, 203, 217);
+  color: black;
+  text-align: left;
+  font-size: 1.2em;
+`;
+
+export const Variable = styled.h3`
+  color: ${(props) => props.color ?? "white"};
+  padding: 1em;
+`;
+export const InfoContainerRisk = styled.div`
+  background-color: ${(props) => props.color};
+  height: 100%;
+`;
+export const InfoContainer = styled.div`
+  background-color: black;
+  height: 100%;
+`;
+
+export const GridContainer = styled(Grid)`
+  padding: 2em;
+`;

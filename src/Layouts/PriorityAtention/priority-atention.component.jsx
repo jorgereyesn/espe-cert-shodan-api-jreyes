@@ -110,7 +110,7 @@ const PriorityAtentionComponent = ({ info }) => {
     "rf",
     "desc"
   );
-  console.log(dataVuln);
+  // console.log(dataVuln);
 
   const classes = useStyles();
   const rows = [];
