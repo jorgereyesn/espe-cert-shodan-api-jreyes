@@ -28,8 +28,8 @@ export const CustomLinkNav = styled(Link)`
     border-bottom: 3px solid green;
   }
 `;
-export const ImageContainer = styled.div``;
+export const ImageContainer = styled(Link)``;
 export const Image = styled.img`
   width: 200px;
-  height: 50px;
+  height: 55px;
 `;

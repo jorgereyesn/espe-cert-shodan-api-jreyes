@@ -55,23 +55,27 @@ const IpBannerComponent = ({
         </S.DataGrid>
         {tags && (
           <S.DataGrid item xs={3}>
-            Tags: {tags.map((item) => item + " - ")}
+            Tags:{" "}
+            {tags.map((item) => (
+              <S.Tags>{item}</S.Tags>
+            ))}
           </S.DataGrid>
         )}
         {ports && (
           <S.DataGrid item xs={3}>
-            Ports: {ports.map((item) => item + " - ")}
+            Ports:{" "}
+            {ports.map((item) => (
+              <S.Tags>{item}</S.Tags>
+            ))}
           </S.DataGrid>
         )}
         {hostnames && (
           <S.DataGrid item xs={3}>
             Hostnames:{" "}
             {hostnames.map((item) => (
-              <p>
-                <a href={`https://` + item} target="_blank">
-                  {item}
-                </a>
-              </p>
+              <S.Link href={`https://` + item} target="_blank">
+                {item}
+              </S.Link>
             ))}
           </S.DataGrid>
         )}

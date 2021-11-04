@@ -8,11 +8,10 @@ const Header = () => {
     <S.Header>
       <S.Wrapper>
         <S.Navigation>
-          <S.CustomLinkNav to="top" spy={true} smooth={true}>
-            <S.ImageContainer>
-              <S.Image src={Logo} alt="logo" />
-            </S.ImageContainer>
-          </S.CustomLinkNav>
+          <S.ImageContainer to="top" spy={true} smooth={true}>
+            <S.Image src={Logo} alt="logo" />
+          </S.ImageContainer>
+
           <S.CustomLinkNav to="gi" spy={true} smooth={true}>
             Informacion General
           </S.CustomLinkNav>

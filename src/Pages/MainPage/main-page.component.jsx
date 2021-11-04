@@ -102,36 +102,55 @@ const MainPageComponent = () => {
       </section>
       <section id="db">
         <S.Line />
-        <S.Title>Banner IP y Vulnerabilidades</S.Title>
+        <S.Title>IP Banner y Vulnerabilidades Detalladas</S.Title>
         <ShodanData info={info} />
       </section>
       <section id="pt">
         <S.Line />
         <S.Title>Priorizacion de Vulnerabilidades</S.Title>
-        <S.DescriptionVariables>
-          <strong>Variables de Entorno</strong>
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>CVE: </strong> Common Vulnerabilities and Exposures
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>CVSS: </strong> Common Vulnerability Scoring System
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>TR: </strong> Total References
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>EP: </strong> Exploitation Probability
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>POE: </strong> Probability of Occurrence of an Event in the IP
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>PSA: </strong> Port Service Available
-        </S.DescriptionVariables>
-        <S.DescriptionVariables>
-          <strong>QT: </strong> Query Tags
-        </S.DescriptionVariables>
+        <S.Line />
+        <S.Title>Descripcion Variables de Entorno</S.Title>
+        <S.GridContainer container justifyContent="center" spacing={3}>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>CVE: </strong> Common Vulnerabilities and Exposures
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>CVSS: </strong> Common Vulnerability Scoring System
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>TR: </strong> Total References
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>EP: </strong> Exploitation Probability
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>POE: </strong> Probability of Occurrence of an Event in
+              the IP
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>PSA: </strong> Port Service Available
+            </S.DescriptionVariables>
+          </Grid>
+          <Grid item md={4}>
+            <S.DescriptionVariables>
+              <strong>QT: </strong> Query Tags
+            </S.DescriptionVariables>
+          </Grid>
+        </S.GridContainer>
+        <S.Line />
+        <S.Title>Tabla de Priorizacion</S.Title>
+        <S.Line />
         <PriorityAtentionComponent info={info} />
       </section>
     </S.Wrapper>

@@ -25,13 +25,13 @@ export const Line = styled.hr`
   border: 4px solid green;
   margin: 0;
 `;
-export const Header = styled.header``;
 
 export const DescriptionVariables = styled.p`
+  color: black;
+  background-color: rgba(116, 238, 63, 0.5);
+  border-radius: 10px;
   margin: 0;
   padding: 0.5em;
-  background-color: rgba(189, 203, 217);
-  color: black;
   text-align: left;
   font-size: 1.2em;
 `;
