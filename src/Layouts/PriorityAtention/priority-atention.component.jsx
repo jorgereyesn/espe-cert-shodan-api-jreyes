@@ -31,8 +31,8 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createData(id, ip, cvss, risk) {
-  return { id, ip, cvss, risk };
+function createData(id, ip, cve, cvss, tr, ep, poe, psa, qt, risk) {
+  return { id, ip, cve, cvss, tr, ep, poe, psa, qt, risk };
 }
 
 const useStyles = makeStyles({
@@ -50,6 +50,7 @@ const PriorityAtentionComponent = ({ info }) => {
     info?.map((item) => item?.data?.map((data) => data.cvss * 1))
   );
   const AOR = averageOrganizationalRisk(sumData(allCVSS), totalVulns);
+  // console.log(AOR);
 
   const years = groupRepeatVariables(
     info.map((item) => item?.data?.map((item1) => item1?.cve?.substr(4, 4) * 1))
@@ -64,7 +65,11 @@ const PriorityAtentionComponent = ({ info }) => {
   );
   //Port Service Available (PSA)
   info?.map(
-    (item) => (item.vuln.psa = (2 / (item?.vuln?.ports?.length * 1)).toFixed(2))
+    (item) =>
+      (item.vuln.psa =
+        item?.vuln?.ports?.length * 1 >= 10
+          ? 1
+          : ((item?.vuln?.ports?.length * 1) / 10).toFixed(2))
   );
   //Query Tags (QT)
   info?.map(
@@ -109,13 +114,19 @@ const PriorityAtentionComponent = ({ info }) => {
 
   const classes = useStyles();
   const rows = [];
-  dataVuln?.map((item, index) =>
+  dataVuln?.map(({ ip, cve, cvss, tr, ep, poe, psa, qt, rf }, index) =>
     rows.push(
       createData(
-        `ESP-vuln-` + (index + 1) + `-` + item.cve,
-        item.ip,
-        item.cvss,
-        item.rf
+        `ESP-vuln-` + (index + 1) + `-` + cve,
+        ip,
+        cve,
+        cvss,
+        tr,
+        ep,
+        poe,
+        psa,
+        qt,
+        rf
       )
     )
   );
@@ -128,21 +139,35 @@ const PriorityAtentionComponent = ({ info }) => {
           <TableRow>
             <StyledTableCell align="center">ID</StyledTableCell>
             <StyledTableCell align="center">IP</StyledTableCell>
+            <StyledTableCell align="center">CVE</StyledTableCell>
             <StyledTableCell align="center">CVSS</StyledTableCell>
+            <StyledTableCell align="center">TR</StyledTableCell>
+            <StyledTableCell align="center">EP</StyledTableCell>
+            <StyledTableCell align="center">POE</StyledTableCell>
+            <StyledTableCell align="center">PSA</StyledTableCell>
+            <StyledTableCell align="center">QT</StyledTableCell>
             <StyledTableCell align="center">RISK FACTOR</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
-              <StyledTableCell component="th" scope="row" align="center">
-                {row.id}
-              </StyledTableCell>
-              <StyledTableCell align="center">{row.ip}</StyledTableCell>
-              <StyledTableCell align="center">{row.cvss}</StyledTableCell>
-              <StyledTableCell align="center">{row.risk}</StyledTableCell>
-            </StyledTableRow>
-          ))}
+          {rows.map(
+            ({ ip, cve, cvss, tr, ep, poe, psa, qt, risk, name, id }) => (
+              <StyledTableRow key={name}>
+                <StyledTableCell component="th" scope="row" align="center">
+                  {id}
+                </StyledTableCell>
+                <StyledTableCell align="center">{ip}</StyledTableCell>
+                <StyledTableCell align="center">{cve}</StyledTableCell>
+                <StyledTableCell align="center">{cvss}</StyledTableCell>
+                <StyledTableCell align="center">{tr}</StyledTableCell>
+                <StyledTableCell align="center">{ep}</StyledTableCell>
+                <StyledTableCell align="center">{poe}</StyledTableCell>
+                <StyledTableCell align="center">{psa}</StyledTableCell>
+                <StyledTableCell align="center">{qt}</StyledTableCell>
+                <StyledTableCell align="center">{risk}</StyledTableCell>
+              </StyledTableRow>
+            )
+          )}
         </TableBody>
       </Table>
     </TableContainer>
