@@ -107,6 +107,47 @@ export const averageRemediationTime = (years, totalVuln) => {
   return ART;
 };
 
-export const addVulnVariables = (info, total) => {
-  console.log(info);
+export const riskFactor = (info, ART, AOR) => {
+  // console.log(info);
+  for (let i = 0; i < info?.length; i++) {
+    const exp = (
+      (info[i].vuln.poe * 1 + info[i].vuln.psa * 1 + info[i].vuln.qt * 1) /
+      3
+    ).toFixed(2);
+    for (let j = 0; j < info[i]?.data?.length; j++) {
+      info[i].data[j].poe = info[i].vuln.poe * 1;
+      info[i].data[j].psa = info[i].vuln.psa * 1;
+      info[i].data[j].qt = info[i].vuln.qt * 1;
+      info[i].data[j].po =
+        Math.pow(
+          (info[i].data[j].tr * 1 + info[i].data[j].ep * 1) / 2,
+          exp * 1
+        ).toFixed(2) * ART;
+      if (info[i].data[j].cvss * 1 >= AOR) {
+        info[i].data[j].impact = 1;
+      } else {
+        info[i].data[j].impact = info[i].data[j].cvss / AOR;
+      }
+      info[i].data[j].rf =
+        (info[i].data[j].po * info[i].data[j].impact).toFixed(2) * 1;
+      info[i].data[j].ip = info[i].vuln.ip_str;
+    }
+  }
+  return info;
+};
+
+export const sortJSON = (data, key, orden) => {
+  // eslint-disable-next-line array-callback-return
+  return data.sort(function (a, b) {
+    const x = a[key],
+      y = b[key];
+
+    if (orden === "asc") {
+      return x < y ? -1 : x > y ? 1 : 0;
+    }
+
+    if (orden === "desc") {
+      return x > y ? -1 : x < y ? 1 : 0;
+    }
+  });
 };
