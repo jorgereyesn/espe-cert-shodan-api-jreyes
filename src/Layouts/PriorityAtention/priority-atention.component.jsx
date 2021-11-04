@@ -14,32 +14,34 @@ import {
   sortJSON,
   sumData,
 } from "../../util";
+import { Paper } from "@material-ui/core";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: theme.palette.common.black,
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 14,
-  },
-}))(TableCell);
+// const StyledTableCell = withStyles((theme) => ({
+//   head: {
+//     backgroundColor: theme.palette.common.black,
+//     color: theme.palette.common.white,
+//     position: "sticky",
+//   },
+//   body: {
+//     fontSize: 14,
+//   },
+// }))(TableCell);
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    backgroundColor: "rgba(189,203,217)",
-  },
-}))(TableRow);
+// const StyledTableRow = withStyles((theme) => ({
+//   root: {
+//     backgroundColor: "rgba(189,203,217)",
+//   },
+// }))(TableRow);
 
 function createData(id, ip, cve, cvss, tr, ep, poe, psa, qt, risk) {
   return { id, ip, cve, cvss, tr, ep, poe, psa, qt, risk };
 }
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 700,
-  },
-});
+// const useStyles = makeStyles({
+//   table: {
+//     minWidth: 700,
+//   },
+// });
 
 const PriorityAtentionComponent = ({ info }) => {
   //GLOBAL VARIABLES
@@ -112,7 +114,7 @@ const PriorityAtentionComponent = ({ info }) => {
   );
   // console.log(dataVuln);
 
-  const classes = useStyles();
+  // const classes = useStyles();
   const rows = [];
   dataVuln?.map(({ ip, cve, cvss, tr, ep, poe, psa, qt, rf }, index) =>
     rows.push(
@@ -133,44 +135,66 @@ const PriorityAtentionComponent = ({ info }) => {
   // console.log(rows);
 
   return (
-    <TableContainer>
-      <Table className={classes.table} aria-label="customized table">
-        <TableHead>
-          <TableRow>
-            <StyledTableCell align="center">ID</StyledTableCell>
-            <StyledTableCell align="center">IP</StyledTableCell>
-            <StyledTableCell align="center">CVE</StyledTableCell>
-            <StyledTableCell align="center">CVSS</StyledTableCell>
-            <StyledTableCell align="center">TR</StyledTableCell>
-            <StyledTableCell align="center">EP</StyledTableCell>
-            <StyledTableCell align="center">POE</StyledTableCell>
-            <StyledTableCell align="center">PSA</StyledTableCell>
-            <StyledTableCell align="center">QT</StyledTableCell>
-            <StyledTableCell align="center">RISK FACTOR</StyledTableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map(
-            ({ ip, cve, cvss, tr, ep, poe, psa, qt, risk, name, id }) => (
-              <StyledTableRow key={name}>
-                <StyledTableCell component="th" scope="row" align="center">
-                  {id}
-                </StyledTableCell>
-                <StyledTableCell align="center">{ip}</StyledTableCell>
-                <StyledTableCell align="center">{cve}</StyledTableCell>
-                <StyledTableCell align="center">{cvss}</StyledTableCell>
-                <StyledTableCell align="center">{tr}</StyledTableCell>
-                <StyledTableCell align="center">{ep}</StyledTableCell>
-                <StyledTableCell align="center">{poe}</StyledTableCell>
-                <StyledTableCell align="center">{psa}</StyledTableCell>
-                <StyledTableCell align="center">{qt}</StyledTableCell>
-                <StyledTableCell align="center">{risk}</StyledTableCell>
-              </StyledTableRow>
-            )
-          )}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <Paper sx={{ width: "100%", overflow: "hidden" }}>
+      <TableContainer sx={{ maxHeight: "440px" }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
+              <TableCell key="id" align="center" style={{ minWidth: 100 }}>
+                ID
+              </TableCell>
+              <TableCell key="ip" align="center" style={{ minWidth: 90 }}>
+                IP
+              </TableCell>
+              <TableCell key="cve" align="center" style={{ minWidth: 90 }}>
+                CVE
+              </TableCell>
+              <TableCell key="cvss" align="center" style={{ minWidth: 90 }}>
+                CVSS
+              </TableCell>
+              <TableCell key="tr" align="center" style={{ minWidth: 90 }}>
+                TR
+              </TableCell>
+              <TableCell key="ep" align="center" style={{ minWidth: 90 }}>
+                EP
+              </TableCell>
+              <TableCell key="poe" align="center" style={{ minWidth: 90 }}>
+                POE
+              </TableCell>
+              <TableCell key="psa" align="center" style={{ minWidth: 90 }}>
+                PSA
+              </TableCell>
+              <TableCell key="qt" align="center" style={{ minWidth: 90 }}>
+                QT
+              </TableCell>
+              <TableCell key="rf" align="center" style={{ minWidth: 90 }}>
+                RISK FACTOR
+              </TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map(
+              ({ ip, cve, cvss, tr, ep, poe, psa, qt, risk, name, id }) => (
+                <TableRow>
+                  <TableCell component="th" scope="row" align="center">
+                    {id}
+                  </TableCell>
+                  <TableCell align="center">{ip}</TableCell>
+                  <TableCell align="center">{cve}</TableCell>
+                  <TableCell align="center">{cvss}</TableCell>
+                  <TableCell align="center">{tr}</TableCell>
+                  <TableCell align="center">{ep}</TableCell>
+                  <TableCell align="center">{poe}</TableCell>
+                  <TableCell align="center">{psa}</TableCell>
+                  <TableCell align="center">{qt}</TableCell>
+                  <TableCell align="center">{risk}</TableCell>
+                </TableRow>
+              )
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Paper>
   );
 };
 export default PriorityAtentionComponent;
