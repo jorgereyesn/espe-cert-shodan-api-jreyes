@@ -9,6 +9,8 @@ import TableRow from "@material-ui/core/TableRow";
 import {
   averageOrganizationalRisk,
   averageRemediationTime,
+  countRepeatVariables,
+  extractRepeatVariables,
   groupRepeatVariables,
   riskFactor,
   sortJSON,
@@ -33,8 +35,8 @@ import { Paper } from "@material-ui/core";
 //   },
 // }))(TableRow);
 
-function createData(id, ip, cve, cvss, tr, ep, poe, psa, qt, risk) {
-  return { id, ip, cve, cvss, tr, ep, poe, psa, qt, risk };
+function createData(id, ip, cve, cvss, tr, ep, poe, popI, pqt, risk) {
+  return { id, ip, cve, cvss, tr, ep, poe, popI, pqt, risk };
 }
 
 // const useStyles = makeStyles({
@@ -57,7 +59,7 @@ const PriorityAtentionComponent = ({ info }) => {
   const years = groupRepeatVariables(
     info.map((item) => item?.data?.map((item1) => item1?.cve?.substr(4, 4) * 1))
   );
-  const ART = averageRemediationTime(years, totalVulns);
+  const AVT = averageRemediationTime(years, totalVulns);
 
   //IP VARIABLES
   //Probability of Occurrence of an Event in the IP (POE)
@@ -65,17 +67,20 @@ const PriorityAtentionComponent = ({ info }) => {
     (item) =>
       (item.vuln.poe = ((item?.data?.length * 1) / totalVulns).toFixed(2))
   );
-  //Port Service Available (PSA)
+  //Probability of Open Ports (POP)
+  const openPorts = info.map((item) => item?.vuln?.ports);
+  const totalPorts = extractRepeatVariables(groupRepeatVariables(openPorts));
   info?.map(
     (item) =>
-      (item.vuln.psa =
+      (item.vuln.popI =
         item?.vuln?.ports?.length * 1 >= 10
           ? 1
-          : ((item?.vuln?.ports?.length * 1) / 10).toFixed(2))
+          : ((item?.vuln?.ports?.length * 1) / totalPorts.length).toFixed(2))
   );
+
   //Query Tags (QT)
   info?.map(
-    (item) => (item.vuln.qt = item?.vuln?.tags?.length * 1 > 0 ? 1 : 0)
+    (item) => (item.vuln.pqt = item?.vuln?.tags?.length * 1 > 0 ? 1 : 0)
   );
 
   //VULNERABILITY VARIABLES
@@ -104,7 +109,7 @@ const PriorityAtentionComponent = ({ info }) => {
   );
 
   //RISK FACTOR
-  info = riskFactor(info, ART, AOR);
+  info = riskFactor(info, AVT, AOR);
   const dataVuln = sortJSON(
     groupRepeatVariables(
       info?.map((item) => item?.data?.map((item1) => item1))
@@ -112,11 +117,11 @@ const PriorityAtentionComponent = ({ info }) => {
     "rf",
     "desc"
   );
-  // console.log(dataVuln);
+  console.log(info);
 
   // const classes = useStyles();
   const rows = [];
-  dataVuln?.map(({ ip, cve, cvss, tr, ep, poe, psa, qt, rf }, index) =>
+  dataVuln?.map(({ ip, cve, cvss, tr, ep, poe, popI, pqt, rf }, index) =>
     rows.push(
       createData(
         `ESP-vuln-` + (index + 1) + `-` + cve,
@@ -126,8 +131,8 @@ const PriorityAtentionComponent = ({ info }) => {
         tr,
         ep,
         poe,
-        psa,
-        qt,
+        popI,
+        pqt,
         rf
       )
     )
@@ -161,11 +166,11 @@ const PriorityAtentionComponent = ({ info }) => {
               <TableCell key="poe" align="center" style={{ minWidth: 90 }}>
                 POE
               </TableCell>
-              <TableCell key="psa" align="center" style={{ minWidth: 90 }}>
-                PSA
+              <TableCell key="popI" align="center" style={{ minWidth: 90 }}>
+                POP
               </TableCell>
-              <TableCell key="qt" align="center" style={{ minWidth: 90 }}>
-                QT
+              <TableCell key="pqt" align="center" style={{ minWidth: 90 }}>
+                PQT
               </TableCell>
               <TableCell key="rf" align="center" style={{ minWidth: 90 }}>
                 RISK FACTOR
@@ -174,7 +179,7 @@ const PriorityAtentionComponent = ({ info }) => {
           </TableHead>
           <TableBody>
             {rows.map(
-              ({ ip, cve, cvss, tr, ep, poe, psa, qt, risk, name, id }) => (
+              ({ ip, cve, cvss, tr, ep, poe, popI, pqt, risk, name, id }) => (
                 <TableRow>
                   <TableCell component="th" scope="row" align="center">
                     {id}
@@ -185,8 +190,8 @@ const PriorityAtentionComponent = ({ info }) => {
                   <TableCell align="center">{tr}</TableCell>
                   <TableCell align="center">{ep}</TableCell>
                   <TableCell align="center">{poe}</TableCell>
-                  <TableCell align="center">{psa}</TableCell>
-                  <TableCell align="center">{qt}</TableCell>
+                  <TableCell align="center">{popI}</TableCell>
+                  <TableCell align="center">{pqt}</TableCell>
                   <TableCell align="center">{risk}</TableCell>
                 </TableRow>
               )

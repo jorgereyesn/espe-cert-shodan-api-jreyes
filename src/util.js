@@ -1,3 +1,32 @@
+//Extrae las vulnerabilidades encontrada dentro de toda la info arrojada por la API
+export const extractVulns = (data, vulns) => {
+  var val = [];
+  var val1 = [];
+  var count = 0;
+  for (let i = 0; i < data.length; i++) {
+    if (typeof data[i].vulns != "undefined") {
+      val.push(data[i].vulns);
+    }
+  }
+  // console.log(Object.keys(val[0]));
+  for (let k = 0; k < vulns.length; k++) {
+    count = 0;
+    // console.log(vulns[k]);
+    for (let j = 0; j < val.length; j++) {
+      if (typeof val[j][vulns[k]] != "undefined") {
+        if (vulns[k].index === val[j][vulns[k]].index && count < 1) {
+          // console.log(val[j][vulns[k]]);
+          val[j][vulns[k]].cve = vulns[k];
+          val1.push(val[j][vulns[k]]);
+          count++;
+        }
+      }
+    }
+  }
+  // console.log(val1.length);
+  return val1;
+};
+
 //Extrae solo una coincidencia de las variables repetidas
 export const extractRepeatVariables = (data) => {
   return data.reduce((acc, item) => {
@@ -107,27 +136,27 @@ export const averageRemediationTime = (years, totalVuln) => {
   return ART;
 };
 
-export const riskFactor = (info, ART, AOR) => {
-  // console.log(info);
+export const riskFactor = (info, AVT) => {
+  console.log(info);
   for (let i = 0; i < info?.length; i++) {
-    const exp = (
-      (info[i].vuln.poe * 1 + info[i].vuln.psa * 1 + info[i].vuln.qt * 1) /
-      3
-    ).toFixed(2);
+    info[i].vuln.poe = info[i].vuln.poe * 1;
+    info[i].vuln.popI = info[i].vuln.popI * 1;
+    info[i].vuln.pqt = info[i].vuln.pqt * 1;
     for (let j = 0; j < info[i]?.data?.length; j++) {
       info[i].data[j].poe = info[i].vuln.poe * 1;
-      info[i].data[j].psa = info[i].vuln.psa * 1;
-      info[i].data[j].qt = info[i].vuln.qt * 1;
+      info[i].data[j].popI = info[i].vuln.popI * 1;
+      info[i].data[j].pqt = info[i].vuln.pqt * 1;
+      info[i].data[j].cvss = info[i].data[j].cvss * 1;
+      info[i].data[j].tr = info[i].data[j].tr * 1;
       info[i].data[j].po =
-        Math.pow(
-          (info[i].data[j].tr * 1 + info[i].data[j].ep * 1) / 2,
-          exp * 1
-        ).toFixed(2) * ART;
-      if (info[i].data[j].cvss * 1 >= AOR) {
-        info[i].data[j].impact = 1;
-      } else {
-        info[i].data[j].impact = info[i].data[j].cvss / AOR;
-      }
+        (
+          ((info[i].data[j].tr + info[i].data[j].ep) / 2) *
+          ((info[i].vuln.poe + info[i].vuln.popI + info[i].vuln.pqt) / 3) *
+          AVT
+        ).toFixed(2) * 1;
+
+      info[i].data[j].impact = info[i].data[j].cvss / 10;
+
       info[i].data[j].rf =
         (info[i].data[j].po * info[i].data[j].impact).toFixed(2) * 1;
       info[i].data[j].ip = info[i].vuln.ip_str;
@@ -150,4 +179,17 @@ export const sortJSON = (data, key, orden) => {
       return x > y ? -1 : x < y ? 1 : 0;
     }
   });
+};
+
+//Extraer solo resultados con vulnerabilidades
+export const extractDataShow = (data) => {
+  const result = [];
+  for (let i = 0; i < data?.length; i++) {
+    if (data[i]?.data?.length > 1) {
+      // console.log(data[i].data.length);
+      result.push(data[i]);
+    }
+  }
+  // console.log(result);
+  return result;
 };

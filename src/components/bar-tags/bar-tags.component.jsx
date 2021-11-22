@@ -45,7 +45,7 @@ const BarTags = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Tags",
+        text: "Query Tags",
         font: {
           size: 20,
         },

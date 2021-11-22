@@ -65,7 +65,10 @@ const IpBannerComponent = ({
           <S.DataGrid item xs={3}>
             Ports:{" "}
             {ports.map((item) => (
-              <S.Tags>{item}</S.Tags>
+              <S.Link href={`https://` + ip + ":" + item} target="_blank">
+                {item}
+              </S.Link>
+              // <S.Tags>{item}</S.Tags>
             ))}
           </S.DataGrid>
         )}

@@ -40,7 +40,7 @@ const IpInformationComponent = ({
         />
       </S.AccordionSum>
       {data.map((item, index) => (
-        <S.AccordionDet key={index}>
+        <S.AccordionDet key={`SHdata-${ip}` + index}>
           <CveDetailsComponent
             cve={item.cve}
             cvss={item.cvss}

@@ -7,16 +7,24 @@ import * as S from "./main-page.styles";
 import PriorityAtentionComponent from "../../Layouts/PriorityAtention/priority-atention.component";
 import {
   averageOrganizationalRisk,
+  extractDataShow,
   groupRepeatVariables,
   sumData,
 } from "../../util";
 import { Grid } from "@material-ui/core";
 
 const MainPageComponent = () => {
+  //INFO ESPE
   const [ips] = useState([
     "192.188.58.61",
     "192.188.58.50",
     "192.188.58.45",
+    // "190.15.135.10", //No tiene vulnerabilidades
+    // "192.188.58.32", //No tiene vulnerabilidades
+    // "192.188.58.40", //No tiene vulnerabilidades
+    // "192.188.58.47", //No tiene vulnerabilidades
+    // "192.188.58.70", //No tiene vulnerabilidades
+    // "192.188.58.99", //No tiene vulnerabilidades
     "192.188.58.59",
     "192.188.58.63",
     "192.188.58.78",
@@ -24,9 +32,28 @@ const MainPageComponent = () => {
     "192.188.58.180",
     "192.188.58.75",
   ]);
+  const orgName = "Escuela Politecnica del Ejercito";
 
-  const info = ips.map((item) => ExtractData(item));
-  const sum = info.map((item) => item.data.length);
+  // INFO UTE
+  // const [ips] = useState(["192.188.51.24", "192.188.51.6"]);
+  // const orgName = "Universidad Tecnologica Equinoccial";
+
+  //INFO EPN
+  // const [ips] = useState([
+  //   "190.96.108.131",
+  //   "201.218.11.43",
+  //   "190.96.111.110",
+  //   "190.96.108.133",
+  //   "190.96.108.132",
+  //   "190.96.111.111",
+  //   "190.96.111.112",
+  // ]);
+  // const orgName = "Escuela Politecnica Nacional";
+
+  const info = extractDataShow(ips.map((item) => ExtractData(item)));
+  // const info = ExtractData();
+  // console.log(info);
+  const sum = info?.map((item) => item?.data?.length);
   const total = sumData(sum);
   const allCVSS = groupRepeatVariables(
     info?.map((item) => item?.data?.map((data) => data.cvss * 1))
@@ -47,7 +74,7 @@ const MainPageComponent = () => {
       : AOR > 6.9 && AOR <= 8.9
       ? "rgba(237, 45, 19)"
       : "rgba(63, 62, 62)";
-  if (!info) return null;
+
   return (
     <S.Wrapper id="top">
       <S.Line />
@@ -57,7 +84,7 @@ const MainPageComponent = () => {
           <Grid item md={4}>
             <S.InfoContainer>
               <S.Variable>Organizacion</S.Variable>
-              <S.Description>Escuela Politecnica del Ejercito</S.Description>
+              <S.Description>{orgName}</S.Description>
               <S.Line />
             </S.InfoContainer>
           </Grid>
@@ -88,7 +115,7 @@ const MainPageComponent = () => {
           </Grid>
           <Grid item md={4}>
             <S.InfoContainer>
-              <S.Variable>Tiempo Promedio de Remediacion (ART)</S.Variable>
+              <S.Variable>Tiempo Promedio de Vulnerabilidades (AVT)</S.Variable>
               <S.Description>{average} dias</S.Description>
               <S.Line />
             </S.InfoContainer>
@@ -139,12 +166,12 @@ const MainPageComponent = () => {
           </Grid>
           <Grid item md={4}>
             <S.DescriptionVariables>
-              <strong>PSA: </strong> Port Service Available
+              <strong>POP: </strong> Probability of Open Ports
             </S.DescriptionVariables>
           </Grid>
           <Grid item md={4}>
             <S.DescriptionVariables>
-              <strong>QT: </strong> Query Tags
+              <strong>PQT: </strong> Probability for Query Tags
             </S.DescriptionVariables>
           </Grid>
         </S.GridContainer>

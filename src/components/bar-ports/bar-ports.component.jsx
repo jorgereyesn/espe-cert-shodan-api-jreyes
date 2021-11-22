@@ -46,7 +46,7 @@ const BarPorts = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Puertos",
+        text: "Puertos Abiertos",
         font: {
           size: 20,
         },

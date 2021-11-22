@@ -49,7 +49,7 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Años de referencia en CVE",
+        text: "Años de referencia en CVE-ID",
         font: {
           size: 20,
         },
