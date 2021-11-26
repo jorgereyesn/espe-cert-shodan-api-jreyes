@@ -7,7 +7,10 @@ const Footer = () => {
     <S.Footer>
       <S.Wrapper>
         <S.Content>
-          <S.Image src={Logo} />
+          <S.Image
+            src="https://www.espe.edu.ec/wp-content/uploads/2018/11/espe.png"
+            alt="logo"
+          />
           <S.Description>
             <strong>PROJECT NAME.</strong> <br />
             Design and Implementation of the IT infrastructure and service

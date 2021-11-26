@@ -9,7 +9,10 @@ const Header = () => {
       <S.Wrapper>
         <S.Navigation>
           <S.ImageContainer to="top" spy={true} smooth={true}>
-            <S.Image src={Logo} alt="logo" />
+            <S.Image
+              src="https://www.espe.edu.ec/wp-content/uploads/2018/11/espe.png"
+              alt="logo"
+            />
           </S.ImageContainer>
 
           <S.CustomLinkNav to="gi" spy={true} smooth={true}>
