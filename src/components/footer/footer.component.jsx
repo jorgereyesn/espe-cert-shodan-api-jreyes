@@ -1,6 +1,5 @@
 import React from "react";
 import * as S from "./footer.styles";
-import Logo from "../../static/media/espe.png";
 
 const Footer = () => {
   return (
