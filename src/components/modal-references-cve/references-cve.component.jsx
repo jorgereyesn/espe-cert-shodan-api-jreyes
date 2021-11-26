@@ -54,7 +54,12 @@ export default function ReferencesCveComponent({ buttonName, references }) {
           <div className={classes.paper}>
             {references.map((item, index) => (
               <p>
-                <a key={index} href={item} target="_blank" rel="noreferrer">
+                <a
+                  key={index + item}
+                  href={item}
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   {item}{" "}
                 </a>
               </p>

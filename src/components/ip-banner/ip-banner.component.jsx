@@ -56,16 +56,20 @@ const IpBannerComponent = ({
         {tags && (
           <S.DataGrid item xs={3}>
             Tags:{" "}
-            {tags.map((item) => (
-              <S.Tags>{item}</S.Tags>
+            {tags.map((item, index) => (
+              <S.Tags key={item + index}>{item}</S.Tags>
             ))}
           </S.DataGrid>
         )}
         {ports && (
           <S.DataGrid item xs={3}>
             Ports:{" "}
-            {ports.map((item) => (
-              <S.Link href={`https://` + ip + ":" + item} target="_blank">
+            {ports.map((item, index) => (
+              <S.Link
+                href={`https://` + ip + ":" + item}
+                target="_blank"
+                key={item + index}
+              >
                 {item}
               </S.Link>
               // <S.Tags>{item}</S.Tags>
@@ -75,8 +79,12 @@ const IpBannerComponent = ({
         {hostnames && (
           <S.DataGrid item xs={3}>
             Hostnames:{" "}
-            {hostnames.map((item) => (
-              <S.Link href={`https://` + item} target="_blank">
+            {hostnames.map((item, index) => (
+              <S.Link
+                href={`https://` + item}
+                target="_blank"
+                key={item + index}
+              >
                 {item}
               </S.Link>
             ))}

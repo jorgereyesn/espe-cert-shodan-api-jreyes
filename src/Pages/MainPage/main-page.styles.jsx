@@ -52,3 +52,17 @@ export const InfoContainer = styled.div`
 export const GridContainer = styled(Grid)`
   padding: 2em;
 `;
+
+export const Loading = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15em;
+  padding-bottom: 15em;
+`;
+
+export const Message = styled.h2`
+  color: #7ed321;
+  font-size: 30px;
+`;

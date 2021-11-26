@@ -27,7 +27,7 @@ const ShodanDataComponent = ({ info }) => {
         ) : (
           <>
             <IpInformationComponent
-              key={index}
+              key={`shSV` - index - item.vuln.ip_str}
               ip={item.vuln.ip_str}
               data={[]}
               org={item.vuln.org}

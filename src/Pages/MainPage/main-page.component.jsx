@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DashboardComponent from "../../Layouts/Dashboard/dashboard.component";
 import ShodanData from "../../Layouts/ShodanData/shodan-data.component";
 import { ExtractData } from "../../components/rest-api/extract-data.component";
+import HashLoader from "react-spinners/HashLoader";
 
 import * as S from "./main-page.styles";
 import PriorityAtentionComponent from "../../Layouts/PriorityAtention/priority-atention.component";
@@ -24,11 +25,11 @@ const MainPageComponent = () => {
     // "192.188.58.40", //No tiene vulnerabilidades
     // "192.188.58.47", //No tiene vulnerabilidades
     // "192.188.58.70", //No tiene vulnerabilidades
-    // "192.188.58.99", //No tiene vulnerabilidades
+    "192.188.58.99", //No tiene vulnerabilidades
     "192.188.58.59",
     "192.188.58.63",
     "192.188.58.78",
-    "192.188.58.76",
+    "192.188.58.76", //No tiene vulnerabilidades
     "192.188.58.180",
     "192.188.58.75",
   ]);
@@ -51,8 +52,6 @@ const MainPageComponent = () => {
   // const orgName = "Escuela Politecnica Nacional";
 
   const info = extractDataShow(ips.map((item) => ExtractData(item)));
-  // const info = ExtractData();
-  // console.log(info);
   const sum = info?.map((item) => item?.data?.length);
   const total = sumData(sum);
   const allCVSS = groupRepeatVariables(
@@ -75,112 +74,141 @@ const MainPageComponent = () => {
       ? "rgba(237, 45, 19)"
       : "rgba(63, 62, 62)";
 
+  //LOADING
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 8000);
+  }, []);
+
   return (
-    <S.Wrapper id="top">
-      <S.Line />
-      <section id="gi">
-        <S.Title>Informacion General de la Organizacion</S.Title>
-        <S.GridContainer container justifyContent="center" spacing={3}>
-          <Grid item md={4}>
-            <S.InfoContainer>
-              <S.Variable>Organizacion</S.Variable>
-              <S.Description>{orgName}</S.Description>
-              <S.Line />
-            </S.InfoContainer>
-          </Grid>
-          <Grid item md={4}>
-            <S.InfoContainer>
-              <S.Variable>Total de vulnerabilidades identificadas</S.Variable>
-              <S.Description>{total}</S.Description>
-              <S.Line />
-            </S.InfoContainer>
-          </Grid>
-          <Grid item md={4}>
-            <S.InfoContainer>
-              <S.Variable>Total de IP escaneadas</S.Variable>
-              <S.Description>{ips.length}</S.Description>
-              <S.Line />
-            </S.InfoContainer>
-          </Grid>
-          <Grid item md={4}>
-            <S.InfoContainerRisk color={colorRisk}>
-              <S.Variable
-                color={colorRisk === "rgba(63, 62, 62)" ? "white" : "black"}
-              >
-                Riesgo Promedio de la Organizacion (AOR)
-              </S.Variable>
-              <S.Description>{AOR}</S.Description>
-              <S.Line />
-            </S.InfoContainerRisk>
-          </Grid>
-          <Grid item md={4}>
-            <S.InfoContainer>
-              <S.Variable>Tiempo Promedio de Vulnerabilidades (AVT)</S.Variable>
-              <S.Description>{average} dias</S.Description>
-              <S.Line />
-            </S.InfoContainer>
-          </Grid>
-        </S.GridContainer>
-      </section>
-      <section id="vi">
-        <S.Line />
-        <S.Title>Informacion General de Vulnerabilidades</S.Title>
-        <DashboardComponent info={info} />
-      </section>
-      <section id="db">
-        <S.Line />
-        <S.Title>IP Banner y Vulnerabilidades Detalladas</S.Title>
-        <ShodanData info={info} />
-      </section>
-      <section id="pt">
-        <S.Line />
-        <S.Title>Priorizacion de Vulnerabilidades</S.Title>
-        <S.Line />
-        <S.Title>Descripcion Variables de Entorno</S.Title>
-        <S.GridContainer container justifyContent="center" spacing={3}>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>CVE: </strong> Common Vulnerabilities and Exposures
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>CVSS: </strong> Common Vulnerability Scoring System
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>TR: </strong> Total References
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>EP: </strong> Exploitation Probability
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>POE: </strong> Probability of Occurrence of an Event in
-              the IP
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>POP: </strong> Probability of Open Ports
-            </S.DescriptionVariables>
-          </Grid>
-          <Grid item md={4}>
-            <S.DescriptionVariables>
-              <strong>PQT: </strong> Probability for Query Tags
-            </S.DescriptionVariables>
-          </Grid>
-        </S.GridContainer>
-        <S.Line />
-        <S.Title>Tabla de Priorizacion</S.Title>
-        <S.Line />
-        <PriorityAtentionComponent info={info} />
-      </section>
-    </S.Wrapper>
+    <>
+      {loading ? (
+        <S.Loading>
+          <HashLoader size={100} color={"#7ED321"} loading={loading} />
+          <S.Message>CARGANDO.....</S.Message>
+        </S.Loading>
+      ) : (
+        <S.Wrapper id="top">
+          <S.Line />
+          <section id="gi">
+            <S.Title>Informacion General de la Organizacion</S.Title>
+            <S.GridContainer container justifyContent="center" spacing={3}>
+              <Grid item md={4}>
+                <S.InfoContainer>
+                  <S.Variable>Organizacion</S.Variable>
+                  <S.Description>{orgName}</S.Description>
+                  <S.Line />
+                </S.InfoContainer>
+              </Grid>
+              <Grid item md={4}>
+                <S.InfoContainer>
+                  <S.Variable>
+                    Total de vulnerabilidades identificadas
+                  </S.Variable>
+                  <S.Description>{total}</S.Description>
+                  <S.Line />
+                </S.InfoContainer>
+              </Grid>
+              <Grid item md={4}>
+                <S.InfoContainer>
+                  <S.Variable>Total de IP escaneadas</S.Variable>
+                  <S.Description>{ips?.length}</S.Description>
+                  <S.Line />
+                </S.InfoContainer>
+              </Grid>
+              <Grid item md={4}>
+                <S.InfoContainer>
+                  <S.Variable>Total de IP con Vulnerabilidades</S.Variable>
+                  <S.Description>{info?.length}</S.Description>
+                  <S.Line />
+                </S.InfoContainer>
+              </Grid>
+              <Grid item md={4}>
+                <S.InfoContainerRisk color={colorRisk}>
+                  <S.Variable
+                    color={colorRisk === "rgba(63, 62, 62)" ? "white" : "black"}
+                  >
+                    Riesgo Promedio de la Organizacion (AOR)
+                  </S.Variable>
+                  <S.Description>{AOR}</S.Description>
+                  <S.Line />
+                </S.InfoContainerRisk>
+              </Grid>
+              <Grid item md={4}>
+                <S.InfoContainer>
+                  <S.Variable>
+                    Tiempo Promedio de Vulnerabilidades (AVT)
+                  </S.Variable>
+                  <S.Description>{average} dias</S.Description>
+                  <S.Line />
+                </S.InfoContainer>
+              </Grid>
+            </S.GridContainer>
+          </section>
+          <section id="vi">
+            <S.Line />
+            <S.Title>Informacion General de Vulnerabilidades</S.Title>
+            <DashboardComponent info={info} />
+          </section>
+          <section id="db">
+            <S.Line />
+            <S.Title>IP Banner y Vulnerabilidades Detalladas</S.Title>
+            <ShodanData info={info} />
+          </section>
+          <section id="pt">
+            <S.Line />
+            <S.Title>Priorizacion de Vulnerabilidades</S.Title>
+            <S.Line />
+            <S.Title>Descripcion Variables de Entorno</S.Title>
+            <S.GridContainer container justifyContent="center" spacing={3}>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>CVE: </strong> Common Vulnerabilities and Exposures
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>CVSS: </strong> Common Vulnerability Scoring System
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>TR: </strong> Total References
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>EP: </strong> Exploitation Probability
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>POE: </strong> Probability of Occurrence of an Event
+                  in the IP
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>POP: </strong> Probability of Open Ports
+                </S.DescriptionVariables>
+              </Grid>
+              <Grid item md={4}>
+                <S.DescriptionVariables>
+                  <strong>PQT: </strong> Probability for Query Tags
+                </S.DescriptionVariables>
+              </Grid>
+            </S.GridContainer>
+            <S.Line />
+            <S.Title>Tabla de Priorizacion</S.Title>
+            <S.Line />
+            <PriorityAtentionComponent info={info} />
+          </section>
+        </S.Wrapper>
+      )}
+    </>
   );
 };
 

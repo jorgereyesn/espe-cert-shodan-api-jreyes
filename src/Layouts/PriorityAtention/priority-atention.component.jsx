@@ -1,5 +1,4 @@
 import React from "react";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,7 +8,6 @@ import TableRow from "@material-ui/core/TableRow";
 import {
   averageOrganizationalRisk,
   averageRemediationTime,
-  countRepeatVariables,
   extractRepeatVariables,
   groupRepeatVariables,
   riskFactor,
@@ -179,8 +177,11 @@ const PriorityAtentionComponent = ({ info }) => {
           </TableHead>
           <TableBody>
             {rows.map(
-              ({ ip, cve, cvss, tr, ep, poe, popI, pqt, risk, name, id }) => (
-                <TableRow>
+              (
+                { ip, cve, cvss, tr, ep, poe, popI, pqt, risk, name, id },
+                index
+              ) => (
+                <TableRow key={index + cve}>
                   <TableCell component="th" scope="row" align="center">
                     {id}
                   </TableCell>
