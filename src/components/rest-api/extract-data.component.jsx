@@ -27,6 +27,6 @@ export const ExtractData = (ip) => {
           console.log(error);
         }
       );
-  }, []);
+  }, [ip]);
   return { vuln, data };
 };

@@ -25,11 +25,11 @@ const MainPageComponent = () => {
     // "192.188.58.40", //No tiene vulnerabilidades
     // "192.188.58.47", //No tiene vulnerabilidades
     // "192.188.58.70", //No tiene vulnerabilidades
-    "192.188.58.99", //No tiene vulnerabilidades
+    // "192.188.58.99", //No tiene vulnerabilidades
     "192.188.58.59",
     "192.188.58.63",
     "192.188.58.78",
-    "192.188.58.76", //No tiene vulnerabilidades
+    // "192.188.58.76", //No tiene vulnerabilidades
     "192.188.58.180",
     "192.188.58.75",
   ]);
