@@ -1,5 +1,5 @@
 import React from "react";
-import Logo from "../../images/espe.png";
+import Logo from "../../static/media/espe.png";
 
 import * as S from "./header.styles.jsx";
 
