@@ -82,7 +82,7 @@ const DoughnutVulnerabilitiesCvssComponent = ({ info, singleIp }) => {
 
   return (
     <S.Wrapper>
-      <Doughnut data={state} options={config} />
+      <Doughnut data={state} options={config} type="" />
     </S.Wrapper>
   );
 };

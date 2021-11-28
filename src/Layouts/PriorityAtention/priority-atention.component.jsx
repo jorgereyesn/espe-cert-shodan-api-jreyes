@@ -15,6 +15,8 @@ import {
   sumData,
 } from "../../util";
 import { Paper } from "@material-ui/core";
+import { ExportReactCSV } from "../../components/export-excel/ExportReactCSV";
+import { ButtonContainer } from "./priority-atention.styles";
 
 // const StyledTableCell = withStyles((theme) => ({
 //   head: {
@@ -138,69 +140,74 @@ const PriorityAtentionComponent = ({ info }) => {
   // console.log(rows);
 
   return (
-    <Paper sx={{ width: "100%", overflow: "hidden" }}>
-      <TableContainer sx={{ maxHeight: "440px" }}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              <TableCell key="id" align="center" style={{ minWidth: 100 }}>
-                ID
-              </TableCell>
-              <TableCell key="ip" align="center" style={{ minWidth: 90 }}>
-                IP
-              </TableCell>
-              <TableCell key="cve" align="center" style={{ minWidth: 90 }}>
-                CVE
-              </TableCell>
-              <TableCell key="cvss" align="center" style={{ minWidth: 90 }}>
-                CVSS
-              </TableCell>
-              <TableCell key="tr" align="center" style={{ minWidth: 90 }}>
-                TR
-              </TableCell>
-              <TableCell key="ep" align="center" style={{ minWidth: 90 }}>
-                EP
-              </TableCell>
-              <TableCell key="poe" align="center" style={{ minWidth: 90 }}>
-                POE
-              </TableCell>
-              <TableCell key="popI" align="center" style={{ minWidth: 90 }}>
-                POP
-              </TableCell>
-              <TableCell key="pqt" align="center" style={{ minWidth: 90 }}>
-                PQT
-              </TableCell>
-              <TableCell key="rf" align="center" style={{ minWidth: 90 }}>
-                RISK FACTOR
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map(
-              (
-                { ip, cve, cvss, tr, ep, poe, popI, pqt, risk, name, id },
-                index
-              ) => (
-                <TableRow key={index + cve}>
-                  <TableCell component="th" scope="row" align="center">
-                    {id}
-                  </TableCell>
-                  <TableCell align="center">{ip}</TableCell>
-                  <TableCell align="center">{cve}</TableCell>
-                  <TableCell align="center">{cvss}</TableCell>
-                  <TableCell align="center">{tr}</TableCell>
-                  <TableCell align="center">{ep}</TableCell>
-                  <TableCell align="center">{poe}</TableCell>
-                  <TableCell align="center">{popI}</TableCell>
-                  <TableCell align="center">{pqt}</TableCell>
-                  <TableCell align="center">{risk}</TableCell>
-                </TableRow>
-              )
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </Paper>
+    <>
+      <ButtonContainer>
+        <ExportReactCSV csvData={dataVuln} fileName="test" />
+      </ButtonContainer>
+      <Paper sx={{ width: "100%", overflow: "hidden" }}>
+        <TableContainer sx={{ maxHeight: "440px" }}>
+          <Table stickyHeader aria-label="sticky table">
+            <TableHead>
+              <TableRow>
+                <TableCell key="id" align="center" style={{ minWidth: 100 }}>
+                  ID
+                </TableCell>
+                <TableCell key="ip" align="center" style={{ minWidth: 90 }}>
+                  IP
+                </TableCell>
+                <TableCell key="cve" align="center" style={{ minWidth: 90 }}>
+                  CVE
+                </TableCell>
+                <TableCell key="cvss" align="center" style={{ minWidth: 90 }}>
+                  CVSS
+                </TableCell>
+                <TableCell key="tr" align="center" style={{ minWidth: 90 }}>
+                  TR
+                </TableCell>
+                <TableCell key="ep" align="center" style={{ minWidth: 90 }}>
+                  EP
+                </TableCell>
+                <TableCell key="poe" align="center" style={{ minWidth: 90 }}>
+                  POE
+                </TableCell>
+                <TableCell key="popI" align="center" style={{ minWidth: 90 }}>
+                  POP
+                </TableCell>
+                <TableCell key="pqt" align="center" style={{ minWidth: 90 }}>
+                  PQT
+                </TableCell>
+                <TableCell key="rf" align="center" style={{ minWidth: 90 }}>
+                  RISK FACTOR
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {rows.map(
+                (
+                  { ip, cve, cvss, tr, ep, poe, popI, pqt, risk, name, id },
+                  index
+                ) => (
+                  <TableRow key={index + cve}>
+                    <TableCell component="th" scope="row" align="center">
+                      {id}
+                    </TableCell>
+                    <TableCell align="center">{ip}</TableCell>
+                    <TableCell align="center">{cve}</TableCell>
+                    <TableCell align="center">{cvss}</TableCell>
+                    <TableCell align="center">{tr}</TableCell>
+                    <TableCell align="center">{ep}</TableCell>
+                    <TableCell align="center">{poe}</TableCell>
+                    <TableCell align="center">{popI}</TableCell>
+                    <TableCell align="center">{pqt}</TableCell>
+                    <TableCell align="center">{risk}</TableCell>
+                  </TableRow>
+                )
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Paper>
+    </>
   );
 };
 export default PriorityAtentionComponent;

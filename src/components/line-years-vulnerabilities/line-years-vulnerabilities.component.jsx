@@ -69,7 +69,7 @@ const LineYearsVulnerabilitiesComponent = ({ info }) => {
 
   return (
     <S.Wrapper>
-      <Line data={state} options={config} />
+      <Line data={state} options={config} type="" />
     </S.Wrapper>
   );
 };

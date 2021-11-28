@@ -63,7 +63,7 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
 
   return (
     <S.Wrapper>
-      <Bar data={state} options={config} />
+      <Bar data={state} options={config} type="" />
     </S.Wrapper>
   );
 };
