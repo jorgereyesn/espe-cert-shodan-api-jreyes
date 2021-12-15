@@ -15,16 +15,16 @@ const Header = () => {
           </S.ImageContainer>
 
           <S.CustomLinkNav to="gi" spy={true} smooth={true}>
-            Informacion General
+            General Information
           </S.CustomLinkNav>
           <S.CustomLinkNav to="vi" spy={true} smooth={true}>
-            Informacion de Vulnerabilidades
+            Vulnerability Information
           </S.CustomLinkNav>
           <S.CustomLinkNav to="db" spy={true} smooth={true}>
-            Banner Detallados
+            Detailed Banners
           </S.CustomLinkNav>
           <S.CustomLinkNav to="pt" spy={true} smooth={true}>
-            Tabla de Priorizacion
+            Prioritization Table
           </S.CustomLinkNav>
         </S.Navigation>
       </S.Wrapper>

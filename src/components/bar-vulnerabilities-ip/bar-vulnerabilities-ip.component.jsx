@@ -43,7 +43,7 @@ const BarVulnerabilitiesIpComponent = ({ info }) => {
     plugins: {
       title: {
         display: true,
-        text: "Cantidad de vulnerabilidades por IP",
+        text: "Number of vulnerabilities per IP",
         font: {
           size: 20,
         },

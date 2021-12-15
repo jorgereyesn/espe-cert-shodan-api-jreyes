@@ -19,9 +19,9 @@ const IpBannerComponent = ({
 }) => {
   let text = "";
   if (numVulns > 0) {
-    text = `Se han detectado ${numVulns} vulnerabilidades`;
+    text = `${numVulns} vulnerabilities have been detected`;
   } else {
-    text = "No se han detectado vulnerabilidades";
+    text = "No vulnerabilities have been detected";
   }
   // console.log(tags);
   return (

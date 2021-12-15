@@ -94,34 +94,32 @@ const MainPageComponent = () => {
         <S.Wrapper id="top">
           <S.Line />
           <section id="gi">
-            <S.Title>Informacion General de la Organizacion</S.Title>
+            <S.Title>General Organization Information</S.Title>
             <S.GridContainer container justifyContent="center" spacing={3}>
               <Grid item md={4}>
                 <S.InfoContainer>
-                  <S.Variable>Organizacion</S.Variable>
+                  <S.Variable>Organization</S.Variable>
                   <S.Description>{orgName}</S.Description>
                   <S.Line />
                 </S.InfoContainer>
               </Grid>
               <Grid item md={4}>
                 <S.InfoContainer>
-                  <S.Variable>
-                    Total de vulnerabilidades identificadas
-                  </S.Variable>
+                  <S.Variable>Total vulnerabilities identified</S.Variable>
                   <S.Description>{total}</S.Description>
                   <S.Line />
                 </S.InfoContainer>
               </Grid>
               <Grid item md={4}>
                 <S.InfoContainer>
-                  <S.Variable>Total de IP escaneadas</S.Variable>
+                  <S.Variable>Total IP scanned</S.Variable>
                   <S.Description>{ips?.length}</S.Description>
                   <S.Line />
                 </S.InfoContainer>
               </Grid>
               <Grid item md={4}>
                 <S.InfoContainer>
-                  <S.Variable>Total de IP con Vulnerabilidades</S.Variable>
+                  <S.Variable>Total IP with Vulnerabilities</S.Variable>
                   <S.Description>{info?.length}</S.Description>
                   <S.Line />
                 </S.InfoContainer>
@@ -131,7 +129,7 @@ const MainPageComponent = () => {
                   <S.Variable
                     color={colorRisk === "rgba(63, 62, 62)" ? "white" : "black"}
                   >
-                    Riesgo Promedio de la Organizacion (AOR)
+                    Average Organizational Risk (AOR)
                   </S.Variable>
                   <S.Description>{AOR}</S.Description>
                   <S.Line />
@@ -139,10 +137,8 @@ const MainPageComponent = () => {
               </Grid>
               <Grid item md={4}>
                 <S.InfoContainer>
-                  <S.Variable>
-                    Tiempo Promedio de Vulnerabilidades (AVT)
-                  </S.Variable>
-                  <S.Description>{average} dias</S.Description>
+                  <S.Variable>Average Vulnerability Time (AVT)</S.Variable>
+                  <S.Description>{average} days</S.Description>
                   <S.Line />
                 </S.InfoContainer>
               </Grid>
@@ -150,19 +146,19 @@ const MainPageComponent = () => {
           </section>
           <section id="vi">
             <S.Line />
-            <S.Title>Informacion General de Vulnerabilidades</S.Title>
+            <S.Title>General Vulnerability Information</S.Title>
             <DashboardComponent info={info} />
           </section>
           <section id="db">
             <S.Line />
-            <S.Title>IP Banner y Vulnerabilidades Detalladas</S.Title>
+            <S.Title>IP Banner and Detailed Vulnerabilities</S.Title>
             <ShodanData info={info} />
           </section>
           <section id="pt">
             <S.Line />
-            <S.Title>Priorizacion de Vulnerabilidades</S.Title>
+            <S.Title>Vulnerability Prioritization</S.Title>
             <S.Line />
-            <S.Title>Descripcion Variables de Entorno</S.Title>
+            <S.Title>Description of Environmental Variables</S.Title>
             <S.GridContainer container justifyContent="center" spacing={3}>
               <Grid item md={4}>
                 <S.DescriptionVariables>
@@ -202,7 +198,7 @@ const MainPageComponent = () => {
               </Grid>
             </S.GridContainer>
             <S.Line />
-            <S.Title>Tabla de Priorizacion</S.Title>
+            <S.Title>Prioritization Table</S.Title>
             <S.Line />
             <PriorityAtentionComponent info={info} />
           </section>
