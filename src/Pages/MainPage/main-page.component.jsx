@@ -88,7 +88,7 @@ const MainPageComponent = () => {
       {loading ? (
         <S.Loading>
           <HashLoader size={100} color={"#7ED321"} loading={loading} />
-          <S.Message>CARGANDO.....</S.Message>
+          <S.Message>Loading.....</S.Message>
         </S.Loading>
       ) : (
         <S.Wrapper id="top">
